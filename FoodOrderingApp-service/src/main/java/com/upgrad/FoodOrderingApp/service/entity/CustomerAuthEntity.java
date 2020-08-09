@@ -2,6 +2,7 @@ package com.upgrad.FoodOrderingApp.service.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 @Entity
@@ -11,13 +12,14 @@ public class CustomerAuthEntity {
     private String uuid;
     private int customerId;
     private String accessToken;
-    private Timestamp loginAt;
-    private Timestamp logoutAt;
-    private Timestamp expiresAt;
+    private ZonedDateTime loginAt;
+    private ZonedDateTime logoutAt;
+    private ZonedDateTime expiresAt;
     private CustomerEntity customerEntity;
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -37,7 +39,7 @@ public class CustomerAuthEntity {
     }
 
     @Basic
-    @Column(name = "customer_id", nullable = false)
+    @Column(name = "customer_id", nullable = false, insertable = false, updatable = false)
     public int getCustomerId() {
         return customerId;
     }
@@ -58,31 +60,31 @@ public class CustomerAuthEntity {
 
     @Basic
     @Column(name = "login_at", nullable = true)
-    public Timestamp getLoginAt() {
+    public ZonedDateTime getLoginAt() {
         return loginAt;
     }
 
-    public void setLoginAt(Timestamp loginAt) {
+    public void setLoginAt(ZonedDateTime loginAt) {
         this.loginAt = loginAt;
     }
 
     @Basic
     @Column(name = "logout_at", nullable = true)
-    public Timestamp getLogoutAt() {
+    public ZonedDateTime getLogoutAt() {
         return logoutAt;
     }
 
-    public void setLogoutAt(Timestamp logoutAt) {
+    public void setLogoutAt(ZonedDateTime logoutAt) {
         this.logoutAt = logoutAt;
     }
 
     @Basic
     @Column(name = "expires_at", nullable = true)
-    public Timestamp getExpiresAt() {
+    public ZonedDateTime getExpiresAt() {
         return expiresAt;
     }
 
-    public void setExpiresAt(Timestamp expiresAt) {
+    public void setExpiresAt(ZonedDateTime expiresAt) {
         this.expiresAt = expiresAt;
     }
 
@@ -106,7 +108,7 @@ public class CustomerAuthEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
     public CustomerEntity getCustomer() {
         return customerEntity;
     }
