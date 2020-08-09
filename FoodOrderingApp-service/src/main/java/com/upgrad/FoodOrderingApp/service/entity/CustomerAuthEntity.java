@@ -14,7 +14,7 @@ public class CustomerAuthEntity {
     private Timestamp loginAt;
     private Timestamp logoutAt;
     private Timestamp expiresAt;
-    private CustomerEntity customerByCustomerId;
+    private CustomerEntity customerEntity;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -106,12 +106,12 @@ public class CustomerAuthEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
-    public CustomerEntity getCustomerByCustomerId() {
-        return customerByCustomerId;
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false, insertable = false, updatable = false)
+    public CustomerEntity getCustomer() {
+        return customerEntity;
     }
 
-    public void setCustomerByCustomerId(CustomerEntity customerByCustomerId) {
-        this.customerByCustomerId = customerByCustomerId;
+    public void setCustomer(CustomerEntity customerEntity) {
+        this.customerEntity = customerEntity;
     }
 }

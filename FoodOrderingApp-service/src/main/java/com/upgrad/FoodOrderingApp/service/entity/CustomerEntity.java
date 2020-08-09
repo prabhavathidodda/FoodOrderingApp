@@ -6,6 +6,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "customer", schema = "public", catalog = "restaurantdb")
+@NamedQueries(
+        {
+                @NamedQuery(name = "customerByContactNumber", query = "select c from CustomerEntity c where c.contactNumber = :contactNumber"),
+
+        }
+)
 public class CustomerEntity {
     private int id;
     private String uuid;
@@ -15,12 +21,12 @@ public class CustomerEntity {
     private String contactNumber;
     private String password;
     private String salt;
-    private Collection<CustomerAddressEntity> customerAddressesById;
     private Collection<CustomerAuthEntity> customerAuthsById;
-    private Collection<OrdersEntity> ordersById;
+
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
     }
@@ -41,21 +47,21 @@ public class CustomerEntity {
 
     @Basic
     @Column(name = "firstname", nullable = false, length = 30)
-    public String getFirstname() {
+    public String getFirstName() {
         return firstname;
     }
 
-    public void setFirstname(String firstname) {
+    public void setFirstName(String firstname) {
         this.firstname = firstname;
     }
 
     @Basic
     @Column(name = "lastname", nullable = true, length = 30)
-    public String getLastname() {
+    public String getLastName() {
         return lastname;
     }
 
-    public void setLastname(String lastname) {
+    public void setLastName(String lastname) {
         this.lastname = lastname;
     }
 
@@ -119,30 +125,13 @@ public class CustomerEntity {
         return Objects.hash(id, uuid, firstname, lastname, email, contactNumber, password, salt);
     }
 
-    @OneToMany(mappedBy = "customerByCustomerId")
-    public Collection<CustomerAddressEntity> getCustomerAddressesById() {
-        return customerAddressesById;
-    }
 
-    public void setCustomerAddressesById(Collection<CustomerAddressEntity> customerAddressesById) {
-        this.customerAddressesById = customerAddressesById;
-    }
-
-    @OneToMany(mappedBy = "customerByCustomerId")
+    @OneToMany(mappedBy = "customer")
     public Collection<CustomerAuthEntity> getCustomerAuthsById() {
         return customerAuthsById;
     }
 
     public void setCustomerAuthsById(Collection<CustomerAuthEntity> customerAuthsById) {
         this.customerAuthsById = customerAuthsById;
-    }
-
-    @OneToMany(mappedBy = "customerByCustomerId")
-    public Collection<OrdersEntity> getOrdersById() {
-        return ordersById;
-    }
-
-    public void setOrdersById(Collection<OrdersEntity> ordersById) {
-        this.ordersById = ordersById;
     }
 }
