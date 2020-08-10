@@ -19,6 +19,18 @@ public class CustomerAuthDao {
         return authEntity;
     }
 
+    public CustomerAuthEntity customerLogout(final CustomerAuthEntity customerAuthEntity) {
+        entityManager.merge(customerAuthEntity);
+        return customerAuthEntity;
+    }
+    public CustomerAuthEntity getCustomerAuthToken(String authorization){
+        try{
+            CustomerAuthEntity customerAuthEntity = entityManager.createNamedQuery("getCustomerAuthToken",CustomerAuthEntity.class).setParameter("accessToken",authorization).getSingleResult();
+            return customerAuthEntity;
+        }catch (NoResultException nre){
+            return null;
+        }
 
+    }
 
 }

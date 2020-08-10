@@ -5,6 +5,7 @@ import com.upgrad.FoodOrderingApp.service.dao.CustomerDao;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerAuthEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
 import com.upgrad.FoodOrderingApp.service.exception.AuthenticationFailedException;
+import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class CustomerService {
     private CustomerDao customerDao;
 
     @Autowired
-    private CustomerAuthDao authDao;
+    private CustomerAuthDao customerAuthDao;
 
     @Autowired
     private PasswordCryptographyProvider cryptographyProvider;
@@ -87,7 +88,7 @@ public class CustomerService {
             authEntity.setLoginAt(now);
             authEntity.setExpiresAt(expiresAt);
             authEntity.setUuid(UUID.randomUUID().toString());
-            authDao.createAuthEntity(authEntity);
+            customerAuthDao.createAuthEntity(authEntity);
 
             return authEntity;
         } else {
@@ -95,8 +96,24 @@ public class CustomerService {
         }
     }
 
-    public CustomerAuthEntity logout(String accessToken) {
-        return null;
+    @Transactional(propagation = Propagation.REQUIRED)
+    public CustomerAuthEntity logout(String authorizationToken) throws AuthorizationFailedException{
+        CustomerAuthEntity customerAuthEntity = customerAuthDao.getCustomerAuthToken(authorizationToken);
+        if (customerAuthEntity == null) {
+            throw new AuthorizationFailedException("ATH-001", "Customer is not Logged in.");
+        }
+        if ( customerAuthEntity.getLogoutAt() != null) {
+            throw new AuthorizationFailedException("ATH-002", "Customer is Logged out.Login in again to access this endpoint");
+        }
+        final ZonedDateTime now = ZonedDateTime.now();
+        if(customerAuthEntity.getExpiresAt().compareTo(now) < 0){
+           throw new AuthorizationFailedException("ATH-003", "Your session is expired.Log in again to access this endpoint");
+       }
+        customerAuthEntity.setLogoutAt(now);
+        customerAuthEntity = customerAuthDao.customerLogout(customerAuthEntity);
+        return customerAuthEntity;
+
+
     }
 
     public CustomerEntity getCustomer(String accessToken) {

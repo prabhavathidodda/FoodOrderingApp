@@ -7,6 +7,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "customer_auth", schema = "public", catalog = "restaurantdb")
+@NamedQueries(
+        {
+                @NamedQuery(name = "getCustomerAuthToken", query = "select c from CustomerAuthEntity c where c.accessToken = :accessToken"),
+
+        }
+)
 public class CustomerAuthEntity {
     private int id;
     private String uuid;
