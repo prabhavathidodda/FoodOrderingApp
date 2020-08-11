@@ -1,9 +1,6 @@
 package com.upgrad.FoodOrderingApp.api.controller;
 
-import com.upgrad.FoodOrderingApp.api.model.LoginResponse;
-import com.upgrad.FoodOrderingApp.api.model.LogoutResponse;
-import com.upgrad.FoodOrderingApp.api.model.SignupCustomerRequest;
-import com.upgrad.FoodOrderingApp.api.model.SignupCustomerResponse;
+import com.upgrad.FoodOrderingApp.api.model.*;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerAuthEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
@@ -37,12 +34,7 @@ public class CustomerController {
         customerEntity.setEmail(signupUserRequest.getEmailAddress());
         customerEntity.setPassword(signupUserRequest.getPassword());
         customerEntity.setContactNumber(signupUserRequest.getContactNumber());
-
-        System.out.println("Email" + customerEntity.getEmail());
         CustomerEntity createdCustomerEntity = customerService.saveCustomer(customerEntity);
-        System.out.println("PUUid" + createdCustomerEntity.getUuid());
-        System.out.println("pemail" + createdCustomerEntity.getEmail());
-
         SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid())
                 .status("CUSTOMER SUCCESSFULLY REGISTERED");
         return new ResponseEntity<SignupCustomerResponse>(customerResponse, HttpStatus.CREATED);
@@ -105,5 +97,4 @@ public class CustomerController {
         }
         return new ResponseEntity<LogoutResponse>(logoutResponse, HttpStatus.OK);
     }
-
 }
