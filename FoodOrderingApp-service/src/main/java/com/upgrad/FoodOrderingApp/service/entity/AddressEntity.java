@@ -6,6 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
@@ -16,11 +17,11 @@ import java.util.UUID;
 //                query = "select u from address")
 // })
 
-@NamedQuery(
-        name="getAllSavedAddresses",
-        query="SELECT c FROM Customer c WHERE c.name LIKE :custName"
-)
-public class AddressEntity {
+//@NamedQuery(
+//        name="getAllSavedAddresses",
+//        query="SELECT c FROM Customer c WHERE c.name LIKE :custName"
+//)
+public class AddressEntity implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
