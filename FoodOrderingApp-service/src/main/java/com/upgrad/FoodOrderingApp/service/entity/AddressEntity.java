@@ -1,37 +1,61 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.UUID;
 
 @Entity
 @Table(name = "address")
-public class Address {
+// @NamedQueries({
+//        @NamedQuery(
+//                name = "getAllSavedAddresses",
+//                query = "select u from address")
+// })
+
+@NamedQuery(
+        name="getAllSavedAddresses",
+        query="SELECT c FROM Customer c WHERE c.name LIKE :custName"
+)
+public class AddressEntity {
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   public int id;
 
   @Column(name = "uuid")
+  @NotNull
+  @Size(max = 200)
   public String uuid;
 
   @Column(name = "flat_buil_number")
+  @Size(max = 255)
   public String flatBuilNumber;
 
   @Column(name = "locality")
+  @Size(max = 255)
   public String locality;
 
   @Column(name = "city")
+  @Size(max = 30)
   public String city;
 
   @Column(name = "pincode")
-  public String pincode;
+  @Size(max = 30)
+  public String pinCode;
 
-  @Column(name = "state_id")
-  public int stateId;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "state_id")
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  private StateEntity state;
 
   @Column(name = "active")
   public int active;
+
+  public AddressEntity() {}
 
   public int getId() {
     return id;
@@ -73,20 +97,20 @@ public class Address {
     this.city = city;
   }
 
-  public String getPincode() {
-    return pincode;
+  public String getPinCode() {
+    return pinCode;
   }
 
-  public void setPincode(String pincode) {
-    this.pincode = pincode;
+  public void setPinCode(String pincode) {
+    this.pinCode = pincode;
   }
 
-  public int getStateId() {
-    return stateId;
+  public StateEntity getState() {
+    return state;
   }
 
-  public void setStateId(int stateId) {
-    this.stateId = stateId;
+  public void setState(StateEntity state) {
+    this.state = state;
   }
 
   public int getActive() {
