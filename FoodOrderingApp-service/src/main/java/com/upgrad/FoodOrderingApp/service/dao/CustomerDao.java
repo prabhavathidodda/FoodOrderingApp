@@ -26,15 +26,17 @@ public class CustomerDao {
             return null;
         }
     }
-    public CustomerEntity getCustomerByUuid (final String uuid){
+
+    public CustomerEntity getCustomerByUuid(final String uuid) {
         try {
-            CustomerEntity customer = entityManager.createNamedQuery("customerByUuid",CustomerEntity.class).setParameter("uuid",uuid).getSingleResult();
+            CustomerEntity customer = entityManager.createNamedQuery("customerByUuid", CustomerEntity.class).setParameter("uuid", uuid).getSingleResult();
             return customer;
-        }catch (NoResultException nre){
+        } catch (NoResultException nre) {
             return null;
         }
     }
-    public CustomerEntity updateCustomer(CustomerEntity updatedCustomer){
+
+    public CustomerEntity updateCustomer(CustomerEntity updatedCustomer) {
         entityManager.merge(updatedCustomer);
         return updatedCustomer;
     }
