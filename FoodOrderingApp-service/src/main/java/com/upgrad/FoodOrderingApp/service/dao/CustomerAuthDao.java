@@ -23,11 +23,12 @@ public class CustomerAuthDao {
         entityManager.merge(customerAuthEntity);
         return customerAuthEntity;
     }
-    public CustomerAuthEntity getCustomerAuthToken(String authorization){
-        try{
-            CustomerAuthEntity customerAuthEntity = entityManager.createNamedQuery("getCustomerAuthToken",CustomerAuthEntity.class).setParameter("accessToken",authorization).getSingleResult();
+
+    public CustomerAuthEntity getCustomerAuthToken(String authorization) {
+        try {
+            CustomerAuthEntity customerAuthEntity = entityManager.createNamedQuery("getCustomerAuthToken", CustomerAuthEntity.class).setParameter("accessToken", authorization).getSingleResult();
             return customerAuthEntity;
-        }catch (NoResultException nre){
+        } catch (NoResultException nre) {
             return null;
         }
 
