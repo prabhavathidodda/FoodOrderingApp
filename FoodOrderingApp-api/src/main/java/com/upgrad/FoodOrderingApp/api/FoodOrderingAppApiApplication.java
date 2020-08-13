@@ -16,5 +16,7 @@ public class FoodOrderingAppApiApplication {
     public static void main(String[] args) {
         SpringApplication.run(FoodOrderingAppApiApplication.class, args);
     }
+
+
 }
 
