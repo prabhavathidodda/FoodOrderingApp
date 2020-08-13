@@ -1,5 +1,11 @@
 package com.upgrad.FoodOrderingApp.service.businness;
 
+<<<<<<< HEAD
+import org.springframework.stereotype.Service;
+
+@Service
+public class AddressService {
+=======
 import com.upgrad.FoodOrderingApp.service.dao.AddressDAO;
 import com.upgrad.FoodOrderingApp.service.dao.CustomerAddressDAO;
 import com.upgrad.FoodOrderingApp.service.dao.StateDAO;
@@ -88,4 +94,5 @@ public class AddressService {
 
     return customerAddressDAO.saveCustomerAddress(customerAddressEntity);
   }
+>>>>>>> anilnarayanan/AddressController
 }
