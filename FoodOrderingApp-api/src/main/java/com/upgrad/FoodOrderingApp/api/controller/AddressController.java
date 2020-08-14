@@ -51,6 +51,7 @@ public class AddressController {
       throws AuthorizationFailedException, AddressNotFoundException, SaveAddressException {
 
     AddressEntity addressEntity = new AddressEntity();
+    System.out.println(authorization);
     String bearerToken = authorization.split("Bearer ")[1];
     CustomerEntity customerEntity = customerService.getCustomer(bearerToken);
 

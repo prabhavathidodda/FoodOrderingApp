@@ -56,7 +56,9 @@ public class AddressEntity implements Serializable {
   @Column(name = "active")
   public int active;
 
-  public AddressEntity() {}
+  public AddressEntity() {
+    active = 1;
+  }
 
   public int getId() {
     return id;

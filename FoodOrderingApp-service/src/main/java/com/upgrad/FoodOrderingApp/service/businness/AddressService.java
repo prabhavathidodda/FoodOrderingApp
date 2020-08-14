@@ -36,7 +36,7 @@ public class AddressService {
   public AddressEntity saveAddress(AddressEntity addressEntity, StateEntity stateEntity)
           throws SaveAddressException, AddressNotFoundException {
     //    Block to check for empty values in fields
-    if (addressEntity.getFlatBuilNumber() != null
+    if (addressEntity.getFlatBuilNumber() == null
             || addressEntity.getLocality() == null
             || addressEntity.getCity() == null
             || addressEntity.getPinCode() == null) {
@@ -49,9 +49,9 @@ public class AddressService {
     }
 
     //    Block to check the existence of UUID in table
-    if (findStateByUUID(stateEntity.getUuid()) == null) {
-      throw new AddressNotFoundException("ANF-002", "No state by this id");
-    }
+//    if (findStateByUUID(stateEntity.getUuid()) == null) {
+//      throw new AddressNotFoundException("ANF-002", "No state by this id");
+//    }
 
     //    On success, return AddressEntity object
     return addressDAO.saveAddress(addressEntity);
