@@ -20,7 +20,8 @@ import java.util.Set;
 @Table(name="restaurant")
 @NamedQueries({
         @NamedQuery(name="getAllRestaurantsByRating",query = "SELECT r FROM RestaurantEntity r ORDER BY r.customerrating DESC"),
-        @NamedQuery(name = "getRestaurantByUuid",query = "SELECT r FROM RestaurantEntity r WHERE r.uuid = :uuid")
+        @NamedQuery(name = "getRestaurantByUuid",query = "SELECT r FROM RestaurantEntity r WHERE r.uuid = :uuid"),
+        @NamedQuery(name = "getRestaurantsByName",query = "SELECT r FROM  RestaurantEntity r WHERE LOWER(r.restaurantname) LIKE :restaurantName")
 })
 public class RestaurantEntity implements Serializable {
     @Id

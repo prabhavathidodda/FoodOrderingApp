@@ -32,6 +32,17 @@ public class RestaurantDAO {
         }catch (NoResultException nre){
             return null;
         }
+    }
+
+    //Method that returns the restaurants list by the entered name
+    public List<RestaurantEntity> getRestaurantsByName(String restaurantSearchName) {
+        try {
+            String restaurantName= "%"+restaurantSearchName.toLowerCase()+"%"; // to make a check with lower
+            List<RestaurantEntity> restaurantEntities = entityManager.createNamedQuery("getRestaurantsByName", RestaurantEntity.class).setParameter("restaurantName",restaurantName).getResultList();
+            return restaurantEntities;
+        }catch (NoResultException nre){
+            return null;
+        }
 
     }
 }

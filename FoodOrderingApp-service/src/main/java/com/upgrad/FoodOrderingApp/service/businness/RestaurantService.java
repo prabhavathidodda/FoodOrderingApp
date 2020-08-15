@@ -15,9 +15,19 @@ public class RestaurantService {
     @Autowired
     private RestaurantDAO restaurantDAO;
     @Transactional(propagation = Propagation.REQUIRED)
-    //Method to get restaurants list
+    //Method to get restaurants list by rating
     public List<RestaurantEntity> getAllRestaurantsByRating(){
         List<RestaurantEntity> restaurantListByRating = restaurantDAO.getAllRestaurantsByRating();
         return restaurantListByRating;
     }
+
+    //Method to get restaurants list by Name entered by user. If restaurant name field entered by the customer is empty, throw RestaurantNotFoundException
+    public List<RestaurantEntity> getRestaurantsByName(String restaurantName)throws RestaurantNotFoundException{
+        if(restaurantName == null || restaurantName ==""){
+            throw new RestaurantNotFoundException("RNF-003","Restaurant name field should not be empty");
+        }
+        List<RestaurantEntity> restaurantNamesList = restaurantDAO.getRestaurantsByName(restaurantName);
+        return restaurantNamesList;
+    }
+
 }
