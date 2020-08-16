@@ -6,6 +6,50 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+<<<<<<< HEAD
+import java.util.List;
+
+@Repository
+public class StateDAO {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    /**
+     * Method to find UUID in state table
+     *
+     * @param uuid Randomly generated UUID
+     * @return State entity object
+     */
+    public StateEntity getStateByUUID(String uuid) {
+        StateEntity stateEntity;
+        try {
+            stateEntity =
+                    entityManager
+                            .createNamedQuery("getStateByUuid", StateEntity.class)
+                            .setParameter("uuid", uuid)
+                            .getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+        return stateEntity;
+    }
+
+    /**
+     * Fetches all states
+     *
+     * @return Null
+     */
+    public List<StateEntity> getAllStates(){
+        try {
+            List<StateEntity> stateEntities = entityManager.createNamedQuery("getAllStates",StateEntity.class).getResultList();
+            return stateEntities;
+        }catch (NoResultException nre){
+            return null;
+        }
+    }
+}
+=======
 
 @Repository
 public class StateDAO {
@@ -23,3 +67,4 @@ public class StateDAO {
 }
 
 
+>>>>>>> master

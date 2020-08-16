@@ -4,11 +4,37 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+<<<<<<< HEAD
+import javax.validation.constraints.NotNull;
+=======
+>>>>>>> master
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "address")
+<<<<<<< HEAD
+@NamedQueries({
+//        @NamedQuery(
+//                name = "deletedSavedAddresses",
+//                query = "DELETE FROM address a WHERE a.uuid LIKE :uuid"
+//        ),
+//        @NamedQuery(
+//                name = "getStateByUUID",
+//                query = "SELECT a FROM address a WHERE a.uuid LIKE :uuid"
+//        ),
+        @NamedQuery(name = "getAddressByUuid", query = "SELECT a from AddressEntity a where a.uuid = :uuid")
+})
+
+public class AddressEntity implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "uuid")
+    @NotNull
+=======
 @NamedQueries(
         {
                 @NamedQuery(name = "getAddressById", query = "select a from AddressEntity a where a.id=:id")
@@ -23,12 +49,17 @@ public class AddressEntity implements Serializable {
     private Integer id;
 
     @Column(name = "uuid")
+>>>>>>> master
     @Size(max = 200)
     private String uuid;
 
     @Column(name = "flat_buil_number")
     @Size(max = 255)
+<<<<<<< HEAD
+    private String flatBuilNumber;
+=======
     private String flatBuildingNumber;
+>>>>>>> master
 
     @Column(name = "locality")
     @Size(max = 255)
@@ -40,6 +71,21 @@ public class AddressEntity implements Serializable {
 
     @Column(name = "pincode")
     @Size(max = 30)
+<<<<<<< HEAD
+    private String pinCode;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "state_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private StateEntity state;
+
+    @Column(name = "active")
+    private int active;
+
+    public AddressEntity() {
+        active = 1;
+    }
+=======
     private String pincode;
 
     @ManyToOne
@@ -49,6 +95,7 @@ public class AddressEntity implements Serializable {
 
     @Column(name = "active")
     private Integer active;
+>>>>>>> master
 
     public Integer getId() {
         return id;
@@ -66,12 +113,21 @@ public class AddressEntity implements Serializable {
         this.uuid = uuid;
     }
 
+<<<<<<< HEAD
+    public String getFlatBuilNumber() {
+        return flatBuilNumber;
+    }
+
+    public void setFlatBuilNumber(String flatBuilNumber) {
+        this.flatBuilNumber = flatBuilNumber;
+=======
     public String getFlatBuildingNumber() {
         return flatBuildingNumber;
     }
 
     public void setFlatBuildingNumber(String flatBuildingNumber) {
         this.flatBuildingNumber = flatBuildingNumber;
+>>>>>>> master
     }
 
     public String getLocality() {
@@ -90,12 +146,21 @@ public class AddressEntity implements Serializable {
         this.city = city;
     }
 
+<<<<<<< HEAD
+    public String getPinCode() {
+        return pinCode;
+    }
+
+    public void setPinCode(String pincode) {
+        this.pinCode = pincode;
+=======
     public String getPincode() {
         return pincode;
     }
 
     public void setPincode(String pincode) {
         this.pincode = pincode;
+>>>>>>> master
     }
 
     public StateEntity getState() {
@@ -106,6 +171,16 @@ public class AddressEntity implements Serializable {
         this.state = state;
     }
 
+<<<<<<< HEAD
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+}
+=======
     public Integer getActive() {
         return active;
     }
@@ -114,3 +189,4 @@ public class AddressEntity implements Serializable {
         this.active = active;
     }
 }
+>>>>>>> master
