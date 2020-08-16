@@ -49,7 +49,7 @@ public class RestaurantController {
             String categories = new String();
             ListIterator<CategoryEntity> categoryListIterator = categoryEntities.listIterator();
             while (categoryListIterator.hasNext()) {
-                categories = categories + categoryListIterator.next().getCategoryname();
+                categories = categories + categoryListIterator.next().getCategoryName();
                 if (categoryListIterator.hasNext()) {
                     categories = categories + ", ";
                 }
@@ -72,12 +72,12 @@ public class RestaurantController {
             //Creating RestaurantList to add to list of RestaurantList
             RestaurantList restaurantList = new RestaurantList()
                     .id(UUID.fromString(restaurantEntityDetails.getUuid()))
-                    .restaurantName(restaurantEntityDetails.getRestaurantname())
-                    .averagePrice(restaurantEntityDetails.getAveragepricefortwo())
+                    .restaurantName(restaurantEntityDetails.getRestaurantName())
+                    .averagePrice(restaurantEntityDetails.getAvgprice())
                     .categories(categories)
-                    .customerRating(BigDecimal.valueOf(restaurantEntityDetails.getCustomerrating()))
-                    .numberCustomersRated(restaurantEntityDetails.getNumberofcustomersrated())
-                    .photoURL(restaurantEntityDetails.getPhotourl())
+                    .customerRating(BigDecimal.valueOf(restaurantEntityDetails.getCustomerRating()))
+                    .numberCustomersRated(restaurantEntityDetails.getNumberCustomersRated())
+                    .photoURL(restaurantEntityDetails.getPhotoUrl())
                     .address(restaurantDetailsResponseAddress);
             //Adding it to the list
             allRestaurantsListDetails.add(restaurantList);

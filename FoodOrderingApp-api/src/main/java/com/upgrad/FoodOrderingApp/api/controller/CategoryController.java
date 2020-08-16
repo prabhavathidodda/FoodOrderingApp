@@ -32,7 +32,7 @@ public class CategoryController {
             List<CategoryListResponse> categoryListResponses = new LinkedList<>();
             categoryEntities.forEach(categoryEntity -> {
                 CategoryListResponse categoryListResponse = new CategoryListResponse()
-                        .categoryName(categoryEntity.getCategoryname())
+                        .categoryName(categoryEntity.getCategoryName())
                         .id(UUID.fromString(categoryEntity.getUuid()));
                 categoryListResponses.add(categoryListResponse);
             });
@@ -65,7 +65,7 @@ public class CategoryController {
         });
 
         CategoryDetailsResponse categoryDetailsResponse = new CategoryDetailsResponse()
-                .categoryName(categoryEntity.getCategoryname())
+                .categoryName(categoryEntity.getCategoryName())
                 .id(UUID.fromString(categoryEntity.getUuid()))
                 .itemList(itemLists);
         return new ResponseEntity<CategoryDetailsResponse>(categoryDetailsResponse,HttpStatus.OK);
