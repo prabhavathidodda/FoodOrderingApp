@@ -1,13 +1,11 @@
 package com.upgrad.FoodOrderingApp.service.businness;
 
-import com.upgrad.FoodOrderingApp.service.dao.AddressDAO;
-import com.upgrad.FoodOrderingApp.service.dao.CustomerAddressDAO;
-import com.upgrad.FoodOrderingApp.service.dao.OrderDAO;
-import com.upgrad.FoodOrderingApp.service.dao.StateDAO;
+import com.upgrad.FoodOrderingApp.service.dao.*;
 import com.upgrad.FoodOrderingApp.service.entity.*;
 import com.upgrad.FoodOrderingApp.service.exception.AddressNotFoundException;
 import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.SaveAddressException;
+import com.upgrad.FoodOrderingApp.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -30,6 +28,9 @@ public class AddressService {
     @Autowired
     private OrderDAO orderDAO;
 
+    @Autowired
+    private CustomerDao customerDAO;
+
     /**
      * Method to save address
      *
@@ -40,13 +41,13 @@ public class AddressService {
      * @throws AddressNotFoundException
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public AddressEntity saveAddress(AddressEntity addressEntity, StateEntity stateEntity)
-            throws SaveAddressException, AddressNotFoundException {
+    public AddressEntity saveAddress(AddressEntity addressEntity, StateEntity stateEntity) throws SaveAddressException, AddressNotFoundException, SignUpRestrictedException {
         //    Block to check for empty values in fields
-        if (addressEntity.getFlatBuilNumber() == null
-                || addressEntity.getLocality() == null
-                || addressEntity.getCity() == null
-                || addressEntity.getPinCode() == null) {
+
+        if (addressEntity.getFlatBuilNumber() == null || addressEntity.getFlatBuilNumber().isEmpty()
+                || addressEntity.getLocality() == null || addressEntity.getLocality().isEmpty()
+                || addressEntity.getCity() == null || addressEntity.getCity().isEmpty()
+                || addressEntity.getPinCode() == null || addressEntity.getPinCode().isEmpty()){
             throw new SaveAddressException("SAR-001", "No field can be empty");
         }
 
@@ -56,9 +57,14 @@ public class AddressService {
         }
 
         //    Block to check the existence of UUID in table
-//    if (findStateByUUID(stateEntity.getUuid()) == null) {
-//      throw new AddressNotFoundException("ANF-002", "No state by this id");
-//    }
+        System.out.println("Hi" + this.getStateByUUID(stateEntity.getUuid()));
+        if (this.getStateByUUID(stateEntity.getUuid()) == null) {
+            throw new AddressNotFoundException("ANF-002", "No state by this id");
+        }
+
+        if(stateEntity == null) {
+            throw new AddressNotFoundException("ANF-002", "No state by this id");
+        }
 
         //    On success, return AddressEntity object
         return addressDAO.saveAddress(addressEntity);
@@ -71,12 +77,13 @@ public class AddressService {
      * @return On success, returns State entity object. On failure, returns NULL
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public StateEntity getStateByUUID(String uuid) {
+    public StateEntity getStateByUUID(String uuid) throws SaveAddressException {
         StateEntity stateEntity = stateDAO.getStateByUUID(uuid);
-        if (stateEntity != null) {
-            return stateEntity;
+        if (stateEntity == null) {
+            return null;
+//            throw new SaveAddressException("SAR-001", "No field can be empty");
         }
-        return null;
+        return stateEntity;
     }
 
     /**

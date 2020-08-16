@@ -15,6 +15,7 @@ import com.upgrad.FoodOrderingApp.service.entity.StateEntity;
 import com.upgrad.FoodOrderingApp.service.exception.AddressNotFoundException;
 import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.SaveAddressException;
+import com.upgrad.FoodOrderingApp.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,9 +54,10 @@ public class AddressController {
     public ResponseEntity<SaveAddressResponse> saveAddress(
             @RequestHeader("authorization") final String authorization,
             @RequestBody(required = false) SaveAddressRequest saveAddressRequest)
-            throws AuthorizationFailedException, AddressNotFoundException, SaveAddressException {
+            throws AuthorizationFailedException, AddressNotFoundException, SaveAddressException, SignUpRestrictedException {
 
         AddressEntity addressEntity = new AddressEntity();
+        StateEntity stateEntity = new StateEntity();
         String bearerToken = authorization.split("Bearer ")[1];
         CustomerEntity customerEntity = customerService.getCustomer(bearerToken);
 
@@ -65,7 +67,7 @@ public class AddressController {
         addressEntity.setCity(saveAddressRequest.getCity());
         addressEntity.setPinCode(saveAddressRequest.getPincode());
 
-        StateEntity stateEntity = addressService.getStateByUUID(saveAddressRequest.getStateUuid());
+        stateEntity = addressService.getStateByUUID(saveAddressRequest.getStateUuid());
         AddressEntity addressCommittedEntity = addressService.saveAddress(addressEntity, stateEntity);
         addressService.saveCustomerAddressEntity(addressCommittedEntity, customerEntity);
         SaveAddressResponse saveAddressResponse =

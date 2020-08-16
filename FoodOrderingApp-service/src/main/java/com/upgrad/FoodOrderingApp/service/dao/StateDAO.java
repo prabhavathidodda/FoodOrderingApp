@@ -24,7 +24,7 @@ public class StateDAO {
         try {
             stateEntity =
                     entityManager
-                            .createNamedQuery("getStateByUUID", StateEntity.class)
+                            .createNamedQuery("getStateByUuid", StateEntity.class)
                             .setParameter("uuid", uuid)
                             .getSingleResult();
         } catch (NoResultException nre) {
