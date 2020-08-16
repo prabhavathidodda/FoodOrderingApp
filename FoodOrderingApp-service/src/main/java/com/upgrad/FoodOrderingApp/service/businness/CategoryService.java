@@ -6,6 +6,7 @@ import com.upgrad.FoodOrderingApp.service.dao.RestaurantDAO;
 import com.upgrad.FoodOrderingApp.service.entity.CategoryEntity;
 import com.upgrad.FoodOrderingApp.service.entity.RestaurantCategoryEntity;
 import com.upgrad.FoodOrderingApp.service.entity.RestaurantEntity;
+import com.upgrad.FoodOrderingApp.service.exception.CategoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +47,19 @@ public class CategoryService {
 
         List<CategoryEntity> categoryEntities = categoryDAO.getAllCategoriesOrderedByName();
         return categoryEntities;
+    }
+
+    public CategoryEntity getCategoryByUUId(String categoryUUID) throws CategoryNotFoundException {
+        if(categoryUUID == null || categoryUUID.isEmpty()){
+            throw new CategoryNotFoundException("CNF-001","Category id field should not be empty");
+        }
+        //Calls getCategoryByUuid of categoryDao to get CategoryEntity
+        CategoryEntity categoryEntity = categoryDAO.getCategoryByUUId(categoryUUID);
+
+        if(categoryEntity == null){ //Checking for categoryEntity to be null or empty to throw exception.
+            throw new CategoryNotFoundException("CNF-002","No category by this id");
+        }
+        return categoryEntity;
     }
 
 }
