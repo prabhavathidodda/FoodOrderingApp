@@ -4,10 +4,7 @@ import com.upgrad.FoodOrderingApp.api.model.*;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerAuthEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
-import com.upgrad.FoodOrderingApp.service.exception.AuthenticationFailedException;
-import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
-import com.upgrad.FoodOrderingApp.service.exception.SignUpRestrictedException;
-import com.upgrad.FoodOrderingApp.service.exception.UpdateCustomerException;
+import com.upgrad.FoodOrderingApp.service.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,22 +22,17 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    private void validateSignup(CustomerEntity customerEntity) throws SignUpRestrictedException {
-        String firstName = customerEntity.getFirstName();
-        String email = customerEntity.getEmail();
-        String contactNumber = customerEntity.getContactNumber();
-        String password = customerEntity.getPassword();
-        if (firstName == null || firstName.isEmpty()
-                || email == null || email.isEmpty()
-                || contactNumber == null || contactNumber.isEmpty()
-                || password == null || password.isEmpty()) {
-            throw new SignUpRestrictedException("SGR-00" +
-                    "5", "Except last name all fields should be filled");
-        }
-    }
+    /**
+     * Method for customer signup
+     * @return returns the “uuid” of the registered customer
+     * @throws SignUpRestrictedException
+     */
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.POST, path = "/customer/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(
+            method = RequestMethod.POST, path = "/customer/signup",
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignupCustomerResponse> signup(@RequestBody(required = false) final SignupCustomerRequest signupUserRequest) throws SignUpRestrictedException {
         final CustomerEntity customerEntity = new CustomerEntity();
         customerEntity.setUuid(UUID.randomUUID().toString());
@@ -56,11 +48,35 @@ public class CustomerController {
         return new ResponseEntity<SignupCustomerResponse>(customerResponse, HttpStatus.CREATED);
     }
 
+    //method to validate signup of a customer
+    private void validateSignup(CustomerEntity customerEntity) throws SignUpRestrictedException {
+        String firstName = customerEntity.getFirstName();
+        String email = customerEntity.getEmail();
+        String contactNumber = customerEntity.getContactNumber();
+        String password = customerEntity.getPassword();
+        if (firstName == null || firstName.isEmpty()
+                || email == null || email.isEmpty()
+                || contactNumber == null || contactNumber.isEmpty()
+                || password == null || password.isEmpty()) {
+            throw new SignUpRestrictedException("SGR-00" +
+                    "5", "Except last name all fields should be filled");
+        }
+    }
+
+    /**
+     * Method for customer login
+     * @param authorization
+     * @return returns the uuid, first name, last name, contact number, and email address
+     * of the authenticated customer and access token in response header
+     * @throws AuthenticationFailedException
+     */
+
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.POST, path = "/customer/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(
+            method = RequestMethod.POST,
+            path = "/customer/login",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<LoginResponse> login(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException {
-
-
         if (authorization == null || !authorization.startsWith("Basic ")) {
             throw new AuthenticationFailedException("ATH-003", "Incorrect format of decoded customer name and password");
         }
@@ -94,6 +110,12 @@ public class CustomerController {
         return new ResponseEntity<>(loginResponse, headers, HttpStatus.OK);
     }
 
+    /**
+     * Method for customer logout
+     * @param authorization
+     * @return returns the 'uuid' of the signed out customer
+     * @throws AuthorizationFailedException
+     */
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST,
             path = "/customer/logout",
@@ -116,6 +138,14 @@ public class CustomerController {
         return new ResponseEntity<LogoutResponse>(logoutResponse, HttpStatus.OK);
     }
 
+    /**
+     * Method for updating customer details
+     * @param authorization
+     * @param updateCustomerRequest
+     * @return returns  uuid,first name and last name of the customer
+     * @throws AuthorizationFailedException
+     * @throws UpdateCustomerException
+     */
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT, path = "/customer",
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -136,7 +166,7 @@ public class CustomerController {
         return new ResponseEntity<UpdateCustomerResponse>(updateCustomerResponse, HttpStatus.OK);
     }
 
-
+    //method to validate password
     private void validatePassword(UpdatePasswordRequest updatePasswordRequest) throws UpdateCustomerException {
         String oldPassword = updatePasswordRequest.getOldPassword();
         String newPassword = updatePasswordRequest.getNewPassword();
@@ -148,13 +178,21 @@ public class CustomerController {
         }
     }
 
+    /**
+     * method for updating customer password
+     * @param authorization
+     * @param updatePasswordRequest
+     * @return returns uuid of the customer
+     * @throws AuthorizationFailedException
+     * @throws UpdateCustomerException
+     */
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.PUT, path = "/customer/password",
+    @RequestMapping(
+            method = RequestMethod.PUT, path = "/customer/password",
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<UpdatePasswordResponse> updateCustomerPassword(@RequestHeader("authorization") final String authorization,
-                                                                         @RequestBody(required = false)
-                                                                                 UpdatePasswordRequest updatePasswordRequest)
+                                                                         @RequestBody(required = false) UpdatePasswordRequest updatePasswordRequest)
             throws AuthorizationFailedException, UpdateCustomerException {
 
         validatePassword(updatePasswordRequest);
