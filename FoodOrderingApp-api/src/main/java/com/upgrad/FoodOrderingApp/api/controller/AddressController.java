@@ -23,7 +23,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/")
 public class AddressController {
@@ -53,7 +52,7 @@ public class AddressController {
     public ResponseEntity<SaveAddressResponse> saveAddress(
             @RequestHeader("authorization") final String authorization,
             @RequestBody(required = false) SaveAddressRequest saveAddressRequest)
-            throws AuthorizationFailedException, AddressNotFoundException, SaveAddressException, SignUpRestrictedException {
+            throws AuthorizationFailedException, AddressNotFoundException, SaveAddressException, SignUpRestrictedException, SaveAddressException {
 
         AddressEntity addressEntity = new AddressEntity();
         StateEntity stateEntity = new StateEntity();
@@ -66,6 +65,8 @@ public class AddressController {
         addressEntity.setCity(saveAddressRequest.getCity());
         addressEntity.setPinCode(saveAddressRequest.getPincode());
 
+//        validateAddressOnBoarding(addressEntity);
+
         stateEntity = addressService.getStateByUUID(saveAddressRequest.getStateUuid());
         AddressEntity addressCommittedEntity = addressService.saveAddress(addressEntity, stateEntity);
         addressService.saveCustomerAddressEntity(addressCommittedEntity, customerEntity);
@@ -75,6 +76,7 @@ public class AddressController {
                         .status("ADDRESS SUCCESSFULLY REGISTERED");
         return new ResponseEntity<SaveAddressResponse>(saveAddressResponse, HttpStatus.CREATED);
     }
+
 
     /**
      * @param authorization

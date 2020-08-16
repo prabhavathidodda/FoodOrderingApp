@@ -41,29 +41,36 @@ public class AddressService {
      * @throws AddressNotFoundException
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public AddressEntity saveAddress(AddressEntity addressEntity, StateEntity stateEntity) throws SaveAddressException, AddressNotFoundException, SignUpRestrictedException {
+    public AddressEntity saveAddress(AddressEntity addressEntity, StateEntity stateEntity) throws AddressNotFoundException, SignUpRestrictedException, SaveAddressException, SaveAddressException {
         //    Block to check for empty values in fields
 
         if (addressEntity.getFlatBuilNumber() == null || addressEntity.getFlatBuilNumber().isEmpty()
                 || addressEntity.getLocality() == null || addressEntity.getLocality().isEmpty()
                 || addressEntity.getCity() == null || addressEntity.getCity().isEmpty()
-                || addressEntity.getPinCode() == null || addressEntity.getPinCode().isEmpty()){
-            throw new SaveAddressException("SAR-001", "No field can be empty");
+                || addressEntity.getPinCode() == null || addressEntity.getPinCode().isEmpty()) {
+            System.out.println("I am in");
+            throw new SignUpRestrictedException("SAR-001", "No field can be empty");
         }
 
         //    Block to check the validity of pincode
-        if (!addressEntity.getPinCode().matches("[0-9]+") && addressEntity.getPinCode().length() != 6) {
-            throw new SaveAddressException("SAR-002", "Invalid pincode");
+        System.out.println(addressEntity.getPinCode().length());
+        if (!addressEntity.getPinCode().matches("[0-9]+")) {
+
+            throw new SignUpRestrictedException("SAR-002", "Invalid pincode");
+        }
+
+        if (addressEntity.getPinCode().length() > 6) {
+            throw new SignUpRestrictedException("SAR-002", "Invalid pincode");
         }
 
         //    Block to check the existence of UUID in table
         System.out.println("Hi" + this.getStateByUUID(stateEntity.getUuid()));
         if (this.getStateByUUID(stateEntity.getUuid()) == null) {
-            throw new AddressNotFoundException("ANF-002", "No state by this id");
+            throw new SignUpRestrictedException("ANF-002", "No state by this id");
         }
 
-        if(stateEntity == null) {
-            throw new AddressNotFoundException("ANF-002", "No state by this id");
+        if (stateEntity == null) {
+            throw new SignUpRestrictedException("ANF-002", "No state by this id");
         }
 
         //    On success, return AddressEntity object
@@ -151,11 +158,11 @@ public class AddressService {
     }
 
     /**
-     *Fetches all states
+     * Fetches all states
      *
      * @return
      */
-    public List<StateEntity> getAllStates(){
+    public List<StateEntity> getAllStates() {
         List<StateEntity> stateEntities = stateDAO.getAllStates();
         return stateEntities;
     }
