@@ -138,9 +138,6 @@ public class CustomerService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public CustomerEntity updateCustomerPassword(String oldPwd, String newPwd, CustomerEntity customerEntity) throws UpdateCustomerException, AuthorizationFailedException {
-        if (oldPwd == null || newPwd == null) {
-            throw new UpdateCustomerException("UCR-003", "No field should be empty");
-        }
         if (newPwd.length() < 8
                 || !newPwd.matches(".*\\d.*")
                 || !newPwd.matches(".*[A-Z].*")
