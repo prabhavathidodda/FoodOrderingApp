@@ -46,7 +46,7 @@ public class AddressService {
      */
     @Transactional(propagation = Propagation.REQUIRED)
     public AddressEntity saveAddress(AddressEntity addressEntity, StateEntity stateEntity) throws AddressNotFoundException, SaveAddressException, SignUpRestrictedException {
-        //    Block to check for empty values in fields
+        //    Block to check for null or empty values in fields
 
         if (addressEntity.getFlatBuilNo() == null || addressEntity.getFlatBuilNo().isEmpty()
                 || addressEntity.getLocality() == null || addressEntity.getLocality().isEmpty()
@@ -64,17 +64,17 @@ public class AddressService {
         }
 
         if (addressEntity.getPincode().length() > 6) {
-            throw new SignUpRestrictedException("SAR-002", "Invalid pincode");
+            throw new SaveAddressException("SAR-002", "Invalid pincode");
         }
 
         //    Block to check the existence of UUID in table
         System.out.println("Hi" + this.getStateByUUID(stateEntity.getUuid()));
         if (this.getStateByUUID(stateEntity.getUuid()) == null) {
-            throw new AddressNotFoundException("ANF-002", "No state by this id");
+            throw new SignUpRestrictedException("ANF-002", "No state by this id");
         }
 
         if (stateEntity == null) {
-            throw new AddressNotFoundException("ANF-002", "No state by this id");
+            throw new SignUpRestrictedException("ANF-002", "No state by this id");
         }
 
         //    On success, return AddressEntity object

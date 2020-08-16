@@ -55,7 +55,7 @@ public class AddressController {
             throws AuthorizationFailedException, AddressNotFoundException, SignUpRestrictedException, SaveAddressException {
 
         AddressEntity addressEntity = new AddressEntity();
-        StateEntity stateEntity = new StateEntity();
+        StateEntity stateEntity;
         String bearerToken = authorization.split("Bearer ")[1];
         CustomerEntity customerEntity = customerService.getCustomer(bearerToken);
         addressEntity.setUuid(UUID.randomUUID().toString());
