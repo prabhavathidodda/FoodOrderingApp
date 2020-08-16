@@ -11,6 +11,7 @@ import com.upgrad.FoodOrderingApp.service.businness.RestaurantService;
 import com.upgrad.FoodOrderingApp.service.entity.CategoryEntity;
 import com.upgrad.FoodOrderingApp.service.entity.ItemEntity;
 import com.upgrad.FoodOrderingApp.service.entity.RestaurantEntity;
+import com.upgrad.FoodOrderingApp.service.entity.*;
 import com.upgrad.FoodOrderingApp.service.exception.AuthorizationFailedException;
 import com.upgrad.FoodOrderingApp.service.exception.CategoryNotFoundException;
 import com.upgrad.FoodOrderingApp.service.exception.InvalidRatingException;
@@ -29,6 +30,7 @@ import java.util.Collections;
 import java.util.UUID;
 
 import static com.upgrad.FoodOrderingApp.service.common.ItemType.NON_VEG;
+import static com.upgrad.FoodOrderingApp.service.type.ItemType.NON_VEG;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -451,7 +453,7 @@ public class RestaurantControllerTest {
         return categoryEntity;
     }
 
-    private RestaurantEntity getRestaurantEntity() {
+   private RestaurantEntity getRestaurantEntity() {
         final String stateId = UUID.randomUUID().toString();
         final StateEntity stateEntity = new StateEntity(stateId, "someState");
         final String addressId = UUID.randomUUID().toString();
@@ -468,4 +470,5 @@ public class RestaurantControllerTest {
         restaurantEntity.setRestaurantName("Famous Restaurant");
         return restaurantEntity;
     }
+
 }

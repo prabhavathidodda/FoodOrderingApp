@@ -1,17 +1,36 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
+<<<<<<< HEAD
+=======
+import com.upgrad.FoodOrderingApp.service.type.ItemType;
+
+>>>>>>> prabha/paymentcontroller
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+<<<<<<< HEAD
 
 @Entity
 @Table(name = "item")
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "item")
+@NamedQueries({
+        @NamedQuery(name = "getItemByUUID", query = "select i from ItemEntity i where i.uuid = :uuid")
+})
+>>>>>>> prabha/paymentcontroller
 public class ItemEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
     @Column(name = "id")
+=======
+>>>>>>> prabha/paymentcontroller
     private Integer id;
 
     @Column(name = "uuid")
@@ -31,9 +50,25 @@ public class ItemEntity implements Serializable {
     @Column(name = "type")
     @NotNull
     @Size(max = 10)
+<<<<<<< HEAD
     private String type;
 
     public ItemEntity() {
+=======
+    private ItemType type;
+
+    @ManyToMany
+    @JoinTable(name = "category_item", joinColumns = @JoinColumn(name = "item_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private List<CategoryEntity> categories = new ArrayList<>();
+
+    public List<CategoryEntity> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryEntity> categories) {
+        this.categories = categories;
+>>>>>>> prabha/paymentcontroller
     }
 
     public Integer getId() {
@@ -68,6 +103,7 @@ public class ItemEntity implements Serializable {
         this.price = price;
     }
 
+<<<<<<< HEAD
     public String getType() {
         return type;
     }
@@ -86,4 +122,14 @@ public class ItemEntity implements Serializable {
                 ", type='" + type + '\'' +
                 '}';
     }
+=======
+    public ItemType getType() {
+        return type;
+    }
+
+    public void setType(ItemType type) {
+        this.type = type;
+    }
+
+>>>>>>> prabha/paymentcontroller
 }
