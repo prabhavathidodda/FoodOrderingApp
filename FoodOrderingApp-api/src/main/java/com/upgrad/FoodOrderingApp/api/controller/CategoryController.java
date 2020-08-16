@@ -29,6 +29,7 @@ public class CategoryController {
     @RequestMapping(method = RequestMethod.GET, path = "/category", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<CategoriesListResponse> getAllCategories() {
         List<CategoryEntity> categoryEntities = categoryService.getAllCategoriesOrderedByName();
+        if(!categoryEntities.isEmpty()) {
             List<CategoryListResponse> categoryListResponses = new LinkedList<>();
             categoryEntities.forEach(categoryEntity -> {
                 CategoryListResponse categoryListResponse = new CategoryListResponse()
@@ -38,17 +39,21 @@ public class CategoryController {
             });
             CategoriesListResponse categoriesListResponse = new CategoriesListResponse().categories(categoryListResponses);
             return new ResponseEntity<CategoriesListResponse>(categoriesListResponse, HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<CategoriesListResponse>(new CategoriesListResponse(), HttpStatus.OK);
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET,path = "/category/{category_id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<CategoryDetailsResponse> getCategoryById(@PathVariable(value = "category_id")final String categoryUUID) throws CategoryNotFoundException {
-        CategoryEntity categoryEntity = categoryService.getCategoryByUUId(categoryUUID);
+        CategoryEntity categoryEntity = categoryService.getCategoryById(categoryUUID);
         return categoryListWithItemsList(categoryEntity);
     }
 
     @RequestMapping(method = RequestMethod.GET,path = "/category/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<CategoryDetailsResponse> getCategoryByIdNULL() throws CategoryNotFoundException {
-        CategoryEntity categoryEntity = categoryService.getCategoryByUUId(null);
+        CategoryEntity categoryEntity = categoryService.getCategoryById(null);
         return categoryListWithItemsList(categoryEntity);
     }
 

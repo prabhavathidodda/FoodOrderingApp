@@ -49,7 +49,7 @@ public class CategoryService {
         return categoryEntities;
     }
 
-    public CategoryEntity getCategoryByUUId(String categoryUUID) throws CategoryNotFoundException {
+    public CategoryEntity getCategoryById(String categoryUUID) throws CategoryNotFoundException {
         if(categoryUUID == null || categoryUUID.isEmpty()){
             throw new CategoryNotFoundException("CNF-001","Category id field should not be empty");
         }
