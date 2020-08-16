@@ -149,4 +149,14 @@ public class AddressService {
             return updatedAddressActiveStatus;
         }
     }
+
+    /**
+     *Fetches all states
+     *
+     * @return
+     */
+    public List<StateEntity> getAllStates(){
+        List<StateEntity> stateEntities = stateDAO.getAllStates();
+        return stateEntities;
+    }
 }

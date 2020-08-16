@@ -3,13 +3,10 @@ package com.upgrad.FoodOrderingApp.api.controller;
 //import com.upgrad.FoodOrderingApp.api.model.SaveAddressRequest;
 //import com.upgrad.FoodOrderingApp.api.model.SaveAddressResponse;
 
-import com.upgrad.FoodOrderingApp.api.model.DeleteAddressResponse;
-import com.upgrad.FoodOrderingApp.api.model.SaveAddressRequest;
-import com.upgrad.FoodOrderingApp.api.model.SaveAddressResponse;
+import com.upgrad.FoodOrderingApp.api.model.*;
 import com.upgrad.FoodOrderingApp.service.businness.AddressService;
 import com.upgrad.FoodOrderingApp.service.businness.CustomerService;
 import com.upgrad.FoodOrderingApp.service.entity.AddressEntity;
-import com.upgrad.FoodOrderingApp.service.entity.CustomerAddressEntity;
 import com.upgrad.FoodOrderingApp.service.entity.CustomerEntity;
 import com.upgrad.FoodOrderingApp.service.entity.StateEntity;
 import com.upgrad.FoodOrderingApp.service.exception.AddressNotFoundException;
@@ -22,6 +19,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin
@@ -99,6 +98,30 @@ public class AddressController {
 
     }
 
+    /**
+     * Fetches list of states from database
+     *
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, path = "/states", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<StatesListResponse> getAllStates() {
+
+        List<StateEntity> stateEntities = addressService.getAllStates();
+        if (!stateEntities.isEmpty()) {
+            List<StatesList> statesLists = new LinkedList<>();
+            stateEntities.forEach(stateEntity -> {
+                StatesList statesList = new StatesList()
+                        .id(UUID.fromString(stateEntity.getUuid()))
+                        .stateName(stateEntity.getStateName());
+                statesLists.add(statesList);
+            });
+
+            StatesListResponse statesListResponse = new StatesListResponse().states(statesLists);
+            return new ResponseEntity<StatesListResponse>(statesListResponse, HttpStatus.OK);
+        }
+        return new ResponseEntity<StatesListResponse>(new StatesListResponse(), HttpStatus.OK);
+    }
 
 
 }
