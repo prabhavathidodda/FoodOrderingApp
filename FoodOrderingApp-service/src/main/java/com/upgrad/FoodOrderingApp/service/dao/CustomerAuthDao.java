@@ -14,16 +14,19 @@ public class CustomerAuthDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    //To create customer auth entity
     public CustomerAuthEntity createAuthEntity(CustomerAuthEntity authEntity) {
         entityManager.persist(authEntity);
         return authEntity;
     }
 
+    //To update customer logout
     public CustomerAuthEntity customerLogout(final CustomerAuthEntity customerAuthEntity) {
         entityManager.merge(customerAuthEntity);
         return customerAuthEntity;
     }
 
+    //To retrieve details of customer by access token
     public CustomerAuthEntity getCustomerAuthToken(String authorization) {
         try {
             CustomerAuthEntity customerAuthEntity = entityManager.createNamedQuery("getCustomerAuthToken", CustomerAuthEntity.class).setParameter("accessToken", authorization).getSingleResult();
