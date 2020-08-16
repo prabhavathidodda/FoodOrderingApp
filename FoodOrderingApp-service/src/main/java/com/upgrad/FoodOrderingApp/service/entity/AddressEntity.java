@@ -61,6 +61,17 @@ public class AddressEntity implements Serializable {
         active = 1;
     }
 
+    public AddressEntity(Integer id, @NotNull @Size(max = 200) String uuid, @Size(max = 255) String flatBuilNumber, @Size(max = 255) String locality, @Size(max = 30) String city, @Size(max = 30) String pinCode, StateEntity state, int active) {
+        this.id = id;
+        this.uuid = uuid;
+        this.flatBuilNumber = flatBuilNumber;
+        this.locality = locality;
+        this.city = city;
+        this.pinCode = pinCode;
+        this.state = state;
+        this.active = active;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -77,11 +88,12 @@ public class AddressEntity implements Serializable {
         this.uuid = uuid;
     }
 
-    public String getFlatBuilNumber() {
+    public String getFlatBuilNo() {
         return flatBuilNumber;
     }
 
-    public void setFlatBuilNumber(String flatBuilNumber) {
+
+    public void setFlatBuilNo(String flatBuilNumber) {
         this.flatBuilNumber = flatBuilNumber;
     }
 
@@ -101,11 +113,11 @@ public class AddressEntity implements Serializable {
         this.city = city;
     }
 
-    public String getPinCode() {
+    public String getPincode() {
         return pinCode;
     }
 
-    public void setPinCode(String pincode) {
+    public void setPincode(String pincode) {
         this.pinCode = pincode;
     }
 

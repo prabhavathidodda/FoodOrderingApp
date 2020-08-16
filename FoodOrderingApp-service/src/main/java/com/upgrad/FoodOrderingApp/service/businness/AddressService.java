@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -31,6 +32,9 @@ public class AddressService {
     @Autowired
     private CustomerDao customerDAO;
 
+    @Autowired
+    CustomerAuthDao customerAuthDao;
+
     /**
      * Method to save address
      *
@@ -41,36 +45,36 @@ public class AddressService {
      * @throws AddressNotFoundException
      */
     @Transactional(propagation = Propagation.REQUIRED)
-    public AddressEntity saveAddress(AddressEntity addressEntity, StateEntity stateEntity) throws AddressNotFoundException, SignUpRestrictedException, SaveAddressException, SaveAddressException {
+    public AddressEntity saveAddress(AddressEntity addressEntity, StateEntity stateEntity) throws AddressNotFoundException, SaveAddressException, SignUpRestrictedException {
         //    Block to check for empty values in fields
 
-        if (addressEntity.getFlatBuilNumber() == null || addressEntity.getFlatBuilNumber().isEmpty()
+        if (addressEntity.getFlatBuilNo() == null || addressEntity.getFlatBuilNo().isEmpty()
                 || addressEntity.getLocality() == null || addressEntity.getLocality().isEmpty()
                 || addressEntity.getCity() == null || addressEntity.getCity().isEmpty()
-                || addressEntity.getPinCode() == null || addressEntity.getPinCode().isEmpty()) {
+                || addressEntity.getPincode() == null || addressEntity.getPincode().isEmpty()) {
             System.out.println("I am in");
-            throw new SignUpRestrictedException("SAR-001", "No field can be empty");
+            throw new SaveAddressException("SAR-001", "No field can be empty");
         }
 
         //    Block to check the validity of pincode
-        System.out.println(addressEntity.getPinCode().length());
-        if (!addressEntity.getPinCode().matches("[0-9]+")) {
+        System.out.println(addressEntity.getPincode().length());
+        if (!addressEntity.getPincode().matches("[0-9]+")) {
 
-            throw new SignUpRestrictedException("SAR-002", "Invalid pincode");
+            throw new SaveAddressException("SAR-002", "Invalid pincode");
         }
 
-        if (addressEntity.getPinCode().length() > 6) {
+        if (addressEntity.getPincode().length() > 6) {
             throw new SignUpRestrictedException("SAR-002", "Invalid pincode");
         }
 
         //    Block to check the existence of UUID in table
         System.out.println("Hi" + this.getStateByUUID(stateEntity.getUuid()));
         if (this.getStateByUUID(stateEntity.getUuid()) == null) {
-            throw new SignUpRestrictedException("ANF-002", "No state by this id");
+            throw new AddressNotFoundException("ANF-002", "No state by this id");
         }
 
         if (stateEntity == null) {
-            throw new SignUpRestrictedException("ANF-002", "No state by this id");
+            throw new AddressNotFoundException("ANF-002", "No state by this id");
         }
 
         //    On success, return AddressEntity object
@@ -83,13 +87,13 @@ public class AddressService {
      * @param uuid
      * @return On success, returns State entity object. On failure, returns NULL
      */
-    @Transactional(propagation = Propagation.REQUIRED)
-    public StateEntity getStateByUUID(String uuid) throws SaveAddressException {
+    public StateEntity getStateByUUID(String uuid) throws AddressNotFoundException {
         StateEntity stateEntity = stateDAO.getStateByUUID(uuid);
+        System.out.println("stateEntity " + stateEntity);
+//        System.out.println("uuid" + stateEntity.getUuid());
         if (stateEntity == null) {
-            return null;
-//            throw new SaveAddressException("SAR-001", "No field can be empty");
-        }
+            throw new AddressNotFoundException("ANF-002", "No state by this id");
+        } else
         return stateEntity;
     }
 
@@ -165,5 +169,20 @@ public class AddressService {
     public List<StateEntity> getAllStates() {
         List<StateEntity> stateEntities = stateDAO.getAllStates();
         return stateEntities;
+    }
+
+    /**
+     * @param customerEntity
+     * @return
+     */
+    public List<AddressEntity> getAllAddress(CustomerEntity customerEntity) {
+        List<AddressEntity> addressEntities = new LinkedList<>();
+        List<CustomerAddressEntity> customerAddressEntities = customerAddressDAO.getAllCustomerAddressByCustomer(customerEntity);
+        if (customerAddressEntities != null) {
+            customerAddressEntities.forEach(customerAddressEntity -> {
+                addressEntities.add(customerAddressEntity.getAddress());
+            });
+        }
+        return addressEntities;
     }
 }

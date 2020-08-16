@@ -21,17 +21,18 @@ public class StateDAO {
      * @return State entity object
      */
     public StateEntity getStateByUUID(String uuid) {
-        StateEntity stateEntity;
+//        StateEntity stateEntity;
         try {
-            stateEntity =
+            StateEntity stateEntity =
                     entityManager
                             .createNamedQuery("getStateByUuid", StateEntity.class)
                             .setParameter("uuid", uuid)
                             .getSingleResult();
+            return stateEntity;
+
         } catch (NoResultException nre) {
             return null;
         }
-        return stateEntity;
     }
 
     /**
