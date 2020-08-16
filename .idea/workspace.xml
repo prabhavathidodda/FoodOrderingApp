@@ -53,15 +53,8 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Admin\Documents\FoodOrderingAppBackend\FoodOrderingApp-db\src\main\resources\config" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.upgrad.FoodOrderingApp.api.controller" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.upgrad.FoodOrderingApp.service.exception" />
-      <recent name="com.upgrad.FoodOrderingApp.api.config" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\razi.akram\Downloads\FoodOrderingAppBackend\FoodOrderingApp-api\src\test\java\com\upgrad\FoodOrderingApp\api\controller" />
@@ -69,6 +62,13 @@
       <recent name="C:\Users\razi.akram\Documents\FoodOrderingAppBackend\FoodOrderingApp-api\src\test\java\com\upgrad\FoodOrderingApp\api\controller" />
       <recent name="C:\Users\Admin\Documents\FoodOrderingAppBackend\FoodOrderingApp-service\src\main\java\com\upgrad\FoodOrderingApp\service\exception" />
       <recent name="C:\Users\Admin\Documents\FoodOrderingAppBackend\FoodOrderingApp-api\src\main\java\com\upgrad\FoodOrderingApp\api\config" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.upgrad.FoodOrderingApp.service.exception" />
+      <recent name="com.upgrad.FoodOrderingApp.api.config" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Admin\Documents\FoodOrderingAppBackend\FoodOrderingApp-db\src\main\resources\config" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -83,7 +83,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.FoodOrderingAppApiApplication">
+  <component name="RunManager" selected="JUnit.PaymentControllerTest">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -142,6 +142,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PaymentControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FoodOrderingApp-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.upgrad.FoodOrderingApp.api.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.PaymentControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RestaurantControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodOrderingApp-api" />
       <extension name="coverage">
@@ -153,23 +169,6 @@
       <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
       <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.RestaurantControllerTest" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RestaurantControllerTest.shouldNotUpdateRestaurantIfRestaurantIdIsEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="FoodOrderingApp-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.upgrad.FoodOrderingApp.api.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.RestaurantControllerTest" />
-      <option name="METHOD_NAME" value="shouldNotUpdateRestaurantIfRestaurantIdIsEmpty" />
-      <option name="TEST_OBJECT" value="method" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -202,11 +201,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PaymentControllerTest" />
         <item itemvalue="Application.FoodOrderingAppApiApplication" />
         <item itemvalue="JUnit.CategoryControllerTest" />
         <item itemvalue="JUnit.OrderControllerTest" />
         <item itemvalue="JUnit.RestaurantControllerTest" />
-        <item itemvalue="JUnit.RestaurantControllerTest.shouldNotUpdateRestaurantIfRestaurantIdIsEmpty" />
       </list>
     </recent_temporary>
   </component>
@@ -230,38 +229,6 @@
       <workItem from="1545232696710" duration="1008000" />
     </task>
     <servers />
-  </component>
-  <component name="TestHistory">
-    <history-entry file="RestaurantControllerTest_shouldNotUpdateRestaurantIfRestaurantIdIsEmpty - 2019.02.20 at 12h 22m 56s.xml">
-      <configuration name="RestaurantControllerTest.shouldNotUpdateRestaurantIfRestaurantIdIsEmpty" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RestaurantControllerTest - 2019.02.20 at 12h 23m 33s.xml">
-      <configuration name="RestaurantControllerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="OrderControllerTest_shouldNotGetCouponByNameIfCouponNameFieldIsEmpty - 2019.02.20 at 12h 27m 23s.xml">
-      <configuration name="OrderControllerTest.shouldNotGetCouponByNameIfCouponNameFieldIsEmpty" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="OrderControllerTest_shouldNotGetCouponByNameIfCouponNameFieldIsEmpty - 2019.02.20 at 12h 28m 58s.xml">
-      <configuration name="OrderControllerTest.shouldNotGetCouponByNameIfCouponNameFieldIsEmpty" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="OrderControllerTest_shouldNotGetCouponByNameIfCouponNameFieldIsEmpty - 2019.02.20 at 12h 30m 29s.xml">
-      <configuration name="OrderControllerTest.shouldNotGetCouponByNameIfCouponNameFieldIsEmpty" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RestaurantControllerTest_shouldNotUpdateRestaurantIfRestaurantIdIsEmpty - 2019.02.20 at 12h 38m 10s.xml">
-      <configuration name="RestaurantControllerTest.shouldNotUpdateRestaurantIfRestaurantIdIsEmpty" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RestaurantControllerTest_shouldNotUpdateRestaurantIfRestaurantIdIsEmpty - 2019.02.20 at 12h 38m 57s.xml">
-      <configuration name="RestaurantControllerTest.shouldNotUpdateRestaurantIfRestaurantIdIsEmpty" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RestaurantControllerTest - 2019.02.20 at 12h 39m 19s.xml">
-      <configuration name="RestaurantControllerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="OrderControllerTest - 2019.02.20 at 12h 39m 38s.xml">
-      <configuration name="OrderControllerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="CategoryControllerTest - 2019.02.20 at 12h 39m 56s.xml">
-      <configuration name="CategoryControllerTest" configurationId="JUnit" />
-    </history-entry>
   </component>
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="242478000" />
