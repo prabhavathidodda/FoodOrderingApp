@@ -1,5 +1,6 @@
 package com.upgrad.FoodOrderingApp.service.businness;
 
+import com.upgrad.FoodOrderingApp.service.dao.CategoryDAO;
 import com.upgrad.FoodOrderingApp.service.dao.RestaurantCategoryDAO;
 import com.upgrad.FoodOrderingApp.service.dao.RestaurantDAO;
 import com.upgrad.FoodOrderingApp.service.entity.CategoryEntity;
@@ -17,7 +18,11 @@ public class CategoryService {
     @Autowired
     private RestaurantDAO restaurantDAO;
     @Autowired
-    RestaurantCategoryDAO restaurantCategoryDao;
+    private RestaurantCategoryDAO restaurantCategoryDao;
+
+    @Autowired
+    private CategoryDAO categoryDAO;
+
     /* Method returns categories for a restaurant and returns list of categories. Its takes restaurantUuid as the input.
     If error throws exception with error code and error message.
     */
@@ -36,4 +41,11 @@ public class CategoryService {
         });
         return categoryList;
     }
+
+    public List<CategoryEntity> getAllCategoriesOrderedByName(){
+
+        List<CategoryEntity> categoryEntities = categoryDAO.getAllCategoriesOrderedByName();
+        return categoryEntities;
+    }
+
 }

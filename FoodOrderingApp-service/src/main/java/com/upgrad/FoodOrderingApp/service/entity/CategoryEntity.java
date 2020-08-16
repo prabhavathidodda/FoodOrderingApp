@@ -1,5 +1,7 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
+import com.upgrad.FoodOrderingApp.service.dao.CategoryDAO;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,7 +10,8 @@ import java.io.Serializable;
 @Entity
 @Table(name="category")
 @NamedQueries({
-        @NamedQuery(name="getCategoryByUUId", query = "SELECT c FROM CategoryEntity c WHERE c.uuid = :uuid")
+        @NamedQuery(name="getCategoryByUUId", query = "SELECT c FROM CategoryEntity c WHERE c.uuid = :uuid"),
+        @NamedQuery(name="getAllCategoriesOrderedByName", query = "SELECT c from CategoryEntity c ORDER BY c.categoryname ASC")
 })
 public class CategoryEntity implements Serializable {
     @Id
