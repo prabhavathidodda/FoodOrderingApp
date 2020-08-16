@@ -25,9 +25,23 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    private void validateSignup(CustomerEntity customerEntity) throws SignUpRestrictedException {
+        String firstName = customerEntity.getFirstName();
+        String email = customerEntity.getEmail();
+        String contactNumber = customerEntity.getContactNumber();
+        String password = customerEntity.getPassword();
+        if (firstName == null || firstName.isEmpty()
+                || email == null || email.isEmpty()
+                || contactNumber == null || contactNumber.isEmpty()
+                || password == null || password.isEmpty()) {
+            throw new SignUpRestrictedException("SGR-00" +
+                    "5", "Except last name all fields should be filled");
+        }
+    }
+
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, path = "/customer/signup", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<SignupCustomerResponse> signup(final SignupCustomerRequest signupUserRequest) throws SignUpRestrictedException {
+    public ResponseEntity<SignupCustomerResponse> signup(@RequestBody(required = false) final SignupCustomerRequest signupUserRequest) throws SignUpRestrictedException {
         final CustomerEntity customerEntity = new CustomerEntity();
         customerEntity.setUuid(UUID.randomUUID().toString());
         customerEntity.setFirstName(signupUserRequest.getFirstName());
@@ -35,6 +49,7 @@ public class CustomerController {
         customerEntity.setEmail(signupUserRequest.getEmailAddress());
         customerEntity.setPassword(signupUserRequest.getPassword());
         customerEntity.setContactNumber(signupUserRequest.getContactNumber());
+        validateSignup(customerEntity);
         CustomerEntity createdCustomerEntity = customerService.saveCustomer(customerEntity);
         SignupCustomerResponse customerResponse = new SignupCustomerResponse().id(createdCustomerEntity.getUuid())
                 .status("CUSTOMER SUCCESSFULLY REGISTERED");

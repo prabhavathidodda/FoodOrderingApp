@@ -37,12 +37,7 @@ public class CustomerService {
         String contactNumber = customerEntity.getContactNumber();
         String email = customerEntity.getEmail();
         String password = customerEntity.getPassword();
-        if (customerEntity.getFirstName() == null
-                || email == null
-                || contactNumber == null
-                || password == null) {
-            throw new SignUpRestrictedException("SGR-005", "Except last name all fields should be filled");
-        } else if (!email.matches(emailRegex)) {
+        if (!email.matches(emailRegex)) {
             throw new SignUpRestrictedException("SGR-002", "Invalid email-id format!");
         } else if (!contactNumber.matches("[0-9]+")
                 || contactNumber.length() != 10) {
