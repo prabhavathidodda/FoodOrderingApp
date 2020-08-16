@@ -2,6 +2,8 @@ package com.upgrad.FoodOrderingApp.api.controller;
 
 //import com.upgrad.FoodOrderingApp.api.model.SaveAddressRequest;
 //import com.upgrad.FoodOrderingApp.api.model.SaveAddressResponse;
+
+import com.upgrad.FoodOrderingApp.api.model.DeleteAddressResponse;
 import com.upgrad.FoodOrderingApp.api.model.SaveAddressRequest;
 import com.upgrad.FoodOrderingApp.api.model.SaveAddressResponse;
 import com.upgrad.FoodOrderingApp.service.businness.AddressService;
@@ -26,49 +28,76 @@ import java.util.UUID;
 @RequestMapping("/")
 public class AddressController {
 
-  @Autowired private AddressService addressService;
-  @Autowired private CustomerService customerService;
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private CustomerService customerService;
 
-  /**
-   * Method to save address of a customer
-   *
-   * @param authorization
-   * @param saveAddressRequest
-   * @return
-   * @throws AuthorizationFailedException
-   * @throws AddressNotFoundException
-   * @throws SaveAddressException
-   */
-  @CrossOrigin
-  @RequestMapping(
-      method = RequestMethod.POST,
-      path = "/address",
-      consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
-      produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public ResponseEntity<SaveAddressResponse> saveAddress(
-      @RequestHeader("authorization") final String authorization,
-      @RequestBody(required = false) SaveAddressRequest saveAddressRequest)
-      throws AuthorizationFailedException, AddressNotFoundException, SaveAddressException {
+    /**
+     * Method to save address of a customer
+     *
+     * @param authorization
+     * @param saveAddressRequest
+     * @return
+     * @throws AuthorizationFailedException
+     * @throws AddressNotFoundException
+     * @throws SaveAddressException
+     */
+    @CrossOrigin
+    @RequestMapping(
+            method = RequestMethod.POST,
+            path = "/address",
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<SaveAddressResponse> saveAddress(
+            @RequestHeader("authorization") final String authorization,
+            @RequestBody(required = false) SaveAddressRequest saveAddressRequest)
+            throws AuthorizationFailedException, AddressNotFoundException, SaveAddressException {
 
-    AddressEntity addressEntity = new AddressEntity();
-    System.out.println(authorization);
-    String bearerToken = authorization.split("Bearer ")[1];
-    CustomerEntity customerEntity = customerService.getCustomer(bearerToken);
+        AddressEntity addressEntity = new AddressEntity();
+        System.out.println(authorization);
+        String bearerToken = authorization.split("Bearer ")[1];
+        CustomerEntity customerEntity = customerService.getCustomer(bearerToken);
 
-    addressEntity.setUuid(UUID.randomUUID().toString());
-    addressEntity.setFlatBuilNumber(saveAddressRequest.getFlatBuildingName());
-    addressEntity.setLocality(saveAddressRequest.getLocality());
-    addressEntity.setCity(saveAddressRequest.getCity());
-    addressEntity.setPinCode(saveAddressRequest.getPincode());
+        addressEntity.setUuid(UUID.randomUUID().toString());
+        addressEntity.setFlatBuilNumber(saveAddressRequest.getFlatBuildingName());
+        addressEntity.setLocality(saveAddressRequest.getLocality());
+        addressEntity.setCity(saveAddressRequest.getCity());
+        addressEntity.setPinCode(saveAddressRequest.getPincode());
 
-    StateEntity stateEntity = addressService.findStateByUUID(saveAddressRequest.getStateUuid());
-    AddressEntity addressCommittedEntity = addressService.saveAddress(addressEntity, stateEntity);
-    CustomerAddressEntity customerAddressEntity =
-        addressService.saveCustomerAddressEntity(addressCommittedEntity, customerEntity);
-    SaveAddressResponse saveAddressResponse =
-        new SaveAddressResponse()
-            .id(addressCommittedEntity.uuid)
-            .status("ADDRESS SUCCESSFULLY REGISTERED");
-    return new ResponseEntity<SaveAddressResponse>(saveAddressResponse, HttpStatus.CREATED);
-  }
+        StateEntity stateEntity = addressService.getStateByUUID(saveAddressRequest.getStateUuid());
+        AddressEntity addressCommittedEntity = addressService.saveAddress(addressEntity, stateEntity);
+        CustomerAddressEntity customerAddressEntity =
+                addressService.saveCustomerAddressEntity(addressCommittedEntity, customerEntity);
+        SaveAddressResponse saveAddressResponse =
+                new SaveAddressResponse()
+                        .id(addressCommittedEntity.uuid)
+                        .status("ADDRESS SUCCESSFULLY REGISTERED");
+        return new ResponseEntity<SaveAddressResponse>(saveAddressResponse, HttpStatus.CREATED);
+    }
+
+    /**
+     * @param authorization
+     * @param uuid
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping(
+            method = RequestMethod.PUT,
+            path = "/address/{address_id}",
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<DeleteAddressResponse> deleteAddress(@RequestHeader("authorization") final String authorization, @PathVariable(value = "address_id") final String uuid) throws AuthorizationFailedException, AddressNotFoundException {
+        String bearerToken = authorization.split("Bearer ")[1];
+        CustomerEntity customerEntity = customerService.getCustomer(bearerToken);
+        AddressEntity addressEntity = addressService.getAddressByUUID(uuid, customerEntity);
+        AddressEntity deletedAddressEntity = addressService.deleteAddress(addressEntity);
+        DeleteAddressResponse deleteAddressResponse = new DeleteAddressResponse()
+                .id(UUID.fromString(deletedAddressEntity.getUuid()))
+                .status("ADDRESS DELETED SUCCESSFULLY");
+        return new ResponseEntity<DeleteAddressResponse>(deleteAddressResponse, HttpStatus.OK);
+
+    }
+
+
+
 }

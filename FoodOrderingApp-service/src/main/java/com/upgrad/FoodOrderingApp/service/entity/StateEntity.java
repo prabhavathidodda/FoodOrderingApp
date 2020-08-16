@@ -3,16 +3,17 @@ package com.upgrad.FoodOrderingApp.service.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @NamedQueries(
         @NamedQuery(
-                name="findStateByUuid",
+                name="getStateByUUID",
                 query="SELECT s FROM StateEntity s WHERE s.uuid LIKE :uuid"
         )
 )
 @Table(name = "state")
-public class StateEntity {
+public class StateEntity implements Serializable {
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)

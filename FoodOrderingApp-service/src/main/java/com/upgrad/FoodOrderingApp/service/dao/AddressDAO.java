@@ -7,37 +7,49 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import java.util.List;
 
 @Repository
 public class AddressDAO {
 
-  @PersistenceContext private EntityManager entityManager;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-  /**
-   *Method to save address in Address entity
-   *
-   * @param addressEntity
-   * @return AddressEntity object
-   */
-  @Transactional
-  public AddressEntity saveAddress(AddressEntity addressEntity) {
-    entityManager.persist(addressEntity);
-    return addressEntity;
-  }
+    /**
+     * Method to save address in Address entity
+     *
+     * @param addressEntity
+     * @return AddressEntity object
+     */
+    @Transactional
+    public AddressEntity saveAddress(AddressEntity addressEntity) {
+        entityManager.persist(addressEntity);
+        return addressEntity;
+    }
 
-//  /**
-//   *
-//   * @return
-//   */
-//  @Transactional
-//  public List<AddressEntity> getAllSavedAddresses() {
-//    try {
-//      Query query = entityManager.createQuery("from address", AddressEntity.class);
-//      return query.getResultList();
-//    } catch (NoResultException nre) {
-//      return null;
-//    }
-//  }
+    /**
+     * @param addressEntity
+     * @return AddressEntity object
+     */
+    @Transactional
+    public AddressEntity deleteAddress(AddressEntity addressEntity) {
+        entityManager.remove(addressEntity);
+        return addressEntity;
+    }
+
+    @Transactional
+    public AddressEntity getAddressByUUID(String uuid) {
+      AddressEntity addressEntity;
+        try {
+          addressEntity = entityManager.createNamedQuery("getAddressByUuid", AddressEntity.class).setParameter("uuid", uuid).getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+      return addressEntity;
+    }
+
+    public AddressEntity updateAddressActiveStatus(AddressEntity addressEntity) {
+        entityManager.merge(addressEntity);
+        return addressEntity;
+    }
+
 }
