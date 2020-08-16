@@ -8,6 +8,9 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "orders")
+@NamedQueries({
+        @NamedQuery(name = "getOrdersByAddress", query = "SELECT o FROM OrdersEntity o WHERE o.address = :address")
+})
 public class OrdersEntity implements Serializable {
 
     @Id

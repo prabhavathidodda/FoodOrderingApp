@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Entity
 @NamedQueries(
         @NamedQuery(
-                name="getStateByUUID",
+                name="getStateByUuid",
                 query="SELECT s FROM StateEntity s WHERE s.uuid LIKE :uuid"
         )
 )

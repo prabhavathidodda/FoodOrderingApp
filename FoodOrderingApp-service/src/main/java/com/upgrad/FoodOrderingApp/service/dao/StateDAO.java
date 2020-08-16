@@ -19,12 +19,12 @@ public class StateDAO {
      * @param uuid Randomly generated UUID
      * @return State entity object
      */
-    public StateEntity findStateByUuid(String uuid) {
+    public StateEntity getStateByUUID(String uuid) {
         StateEntity stateEntity;
         try {
             stateEntity =
                     entityManager
-                            .createNamedQuery("findStateByUuid", StateEntity.class)
+                            .createNamedQuery("getStateByUUID", StateEntity.class)
                             .setParameter("uuid", uuid)
                             .getSingleResult();
         } catch (NoResultException nre) {

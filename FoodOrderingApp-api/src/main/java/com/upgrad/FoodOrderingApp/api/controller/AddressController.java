@@ -30,6 +30,7 @@ public class AddressController {
 
     @Autowired
     private AddressService addressService;
+
     @Autowired
     private CustomerService customerService;
 
@@ -55,7 +56,6 @@ public class AddressController {
             throws AuthorizationFailedException, AddressNotFoundException, SaveAddressException {
 
         AddressEntity addressEntity = new AddressEntity();
-        System.out.println(authorization);
         String bearerToken = authorization.split("Bearer ")[1];
         CustomerEntity customerEntity = customerService.getCustomer(bearerToken);
 
@@ -67,11 +67,10 @@ public class AddressController {
 
         StateEntity stateEntity = addressService.getStateByUUID(saveAddressRequest.getStateUuid());
         AddressEntity addressCommittedEntity = addressService.saveAddress(addressEntity, stateEntity);
-        CustomerAddressEntity customerAddressEntity =
-                addressService.saveCustomerAddressEntity(addressCommittedEntity, customerEntity);
+        addressService.saveCustomerAddressEntity(addressCommittedEntity, customerEntity);
         SaveAddressResponse saveAddressResponse =
                 new SaveAddressResponse()
-                        .id(addressCommittedEntity.uuid)
+                        .id(addressCommittedEntity.getUuid())
                         .status("ADDRESS SUCCESSFULLY REGISTERED");
         return new ResponseEntity<SaveAddressResponse>(saveAddressResponse, HttpStatus.CREATED);
     }

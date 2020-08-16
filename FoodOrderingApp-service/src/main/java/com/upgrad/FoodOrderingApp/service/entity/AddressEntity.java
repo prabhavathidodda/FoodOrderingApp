@@ -11,14 +11,14 @@ import java.io.Serializable;
 @Entity
 @Table(name = "address")
 @NamedQueries({
-        @NamedQuery(
-                name = "deletedSavedAddresses",
-                query = "DELETE FROM address a WHERE a.uuid LIKE :uuid"
-        ),
-        @NamedQuery(
-                name = "getStateByUUID",
-                query = "SELECT a FROM address a WHERE a.uuid LIKE :uuid"
-        ),
+//        @NamedQuery(
+//                name = "deletedSavedAddresses",
+//                query = "DELETE FROM address a WHERE a.uuid LIKE :uuid"
+//        ),
+//        @NamedQuery(
+//                name = "getStateByUUID",
+//                query = "SELECT a FROM address a WHERE a.uuid LIKE :uuid"
+//        ),
         @NamedQuery(name = "getAddressByUuid", query = "SELECT a from AddressEntity a where a.uuid = :uuid")
 })
 
