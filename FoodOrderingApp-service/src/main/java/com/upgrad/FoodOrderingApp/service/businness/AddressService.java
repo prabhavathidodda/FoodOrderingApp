@@ -1,5 +1,6 @@
 package com.upgrad.FoodOrderingApp.service.businness;
 
+<<<<<<< HEAD
 import com.upgrad.FoodOrderingApp.service.dao.*;
 import com.upgrad.FoodOrderingApp.service.entity.*;
 import com.upgrad.FoodOrderingApp.service.exception.AddressNotFoundException;
@@ -12,11 +13,20 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+=======
+import com.upgrad.FoodOrderingApp.service.dao.AddressDAO;
+import com.upgrad.FoodOrderingApp.service.entity.AddressEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+>>>>>>> master
 
 @Service
 public class AddressService {
 
     @Autowired
+<<<<<<< HEAD
     private AddressDAO addressDAO;
 
     @Autowired
@@ -167,3 +177,12 @@ public class AddressService {
         return stateEntities;
     }
 }
+=======
+    private AddressDAO addressDao;
+
+    @Transactional
+    public AddressEntity getAddressById(final Integer addressId) {
+        return addressDao.getAddressById(addressId);
+    }
+}
+>>>>>>> master

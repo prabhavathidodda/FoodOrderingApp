@@ -1,4 +1,4 @@
-/*
+
 package com.upgrad.FoodOrderingApp.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -346,7 +346,7 @@ public class RestaurantControllerTest {
 
         mockMvc
                 .perform(get("/restaurant/emptyString").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .header("authorization", "Bearer database_accesstoken2"))
+                        .header("authorization", "Bearer database_accesstoken2"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("code").value("RNF-002"));
         verify(mockCustomerService, times(0)).getCustomer("database_accesstoken2");
@@ -468,4 +468,4 @@ public class RestaurantControllerTest {
         restaurantEntity.setRestaurantName("Famous Restaurant");
         return restaurantEntity;
     }
-}*/
+}
