@@ -28,7 +28,7 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
 
     @RequestMapping(method = RequestMethod.GET, path = "/restaurant", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<RestaurantListResponse> getAllRestaurants() {
@@ -102,14 +102,14 @@ public class RestaurantController {
         return restaurantLists(allRestaurants);
     }
 
-    @RequestMapping(method = RequestMethod.GET,path = "/category/{category_id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<RestaurantListResponse> getRestaurantByCategoryId(@PathVariable(value = "category_id")String categoryId) throws CategoryNotFoundException {
+    @RequestMapping(method = RequestMethod.GET,path = "/restaurant/category/{category_id}",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<RestaurantListResponse> getRestaurantByCategoryId(@PathVariable(value = "category_id")String categoryUUID) throws CategoryNotFoundException {
         //Calls restaurantByCategory method of restaurantService to get the list of restaurant entity.
-        List<RestaurantEntity> allRestaurants = restaurantService.getRestaurantsByCategory(categoryId);
+        List<RestaurantEntity> allRestaurants = restaurantService.getRestaurantsByCategory(categoryUUID);
         return restaurantLists(allRestaurants);
     }
 
-    @RequestMapping(method = RequestMethod.GET,path = "/category/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(method = RequestMethod.GET,path = "/restaurant/category/",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<RestaurantListResponse> getRestaurantByCategoryIdNULL() throws CategoryNotFoundException {
         //Calls restaurantByCategory method of restaurantService to get the list of restaurant entity.
         List<RestaurantEntity> allRestaurants = restaurantService.getRestaurantsByCategory(null);

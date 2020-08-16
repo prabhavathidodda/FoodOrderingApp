@@ -1,14 +1,19 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
+import com.upgrad.FoodOrderingApp.service.dao.CategoryDAO;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="category")
 @NamedQueries({
-        @NamedQuery(name="getCategoryByUUId", query = "SELECT c FROM CategoryEntity c WHERE c.uuid = :uuid")
+        @NamedQuery(name="getCategoryByUUId", query = "SELECT c FROM CategoryEntity c WHERE c.uuid = :uuid"),
+        @NamedQuery(name="getAllCategoriesOrderedByName", query = "SELECT c from CategoryEntity c ORDER BY c.categoryname ASC")
 })
 public class CategoryEntity implements Serializable {
     @Id
@@ -24,6 +29,19 @@ public class CategoryEntity implements Serializable {
     @Column(name = "category_name")
     @Size(max = 255)
     private String categoryname;
+
+    @ManyToMany
+    @JoinTable(name = "category_item", joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private List<ItemEntity> items = new ArrayList<>();
+
+    public List<ItemEntity> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemEntity> items) {
+        this.items = items;
+    }
 
     public Integer getId() {
         return id;
@@ -41,11 +59,11 @@ public class CategoryEntity implements Serializable {
         this.uuid = uuid;
     }
 
-    public String getCategoryname() {
+    public String getCategoryName() {
         return categoryname;
     }
 
-    public void setCategoryname(String categoryname) {
+    public void setCategoryName(String categoryname) {
         this.categoryname = categoryname;
     }
 }
