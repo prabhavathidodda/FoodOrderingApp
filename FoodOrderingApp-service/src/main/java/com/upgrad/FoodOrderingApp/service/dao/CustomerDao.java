@@ -13,11 +13,13 @@ public class CustomerDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    //To save customer in customer entity
     public CustomerEntity saveCustomer(CustomerEntity customerEntity) {
         entityManager.persist(customerEntity);
         return customerEntity;
     }
 
+    //To retrieve customer details by contact number
     public CustomerEntity getCustomerByContactNumber(String customerContactNumber) {
         try {
             return entityManager.createNamedQuery("customerByContactNumber", CustomerEntity.class).setParameter("contactNumber", customerContactNumber)
@@ -27,6 +29,7 @@ public class CustomerDao {
         }
     }
 
+    //To retrieve customer details by customer uuid
     public CustomerEntity getCustomerByUuid(final String uuid) {
         try {
             CustomerEntity customer = entityManager.createNamedQuery("customerByUuid", CustomerEntity.class).setParameter("uuid", uuid).getSingleResult();
@@ -36,6 +39,7 @@ public class CustomerDao {
         }
     }
 
+    //To update customer details in customer entity
     public CustomerEntity updateCustomer(CustomerEntity updatedCustomer) {
         entityManager.merge(updatedCustomer);
         return updatedCustomer;

@@ -1,5 +1,8 @@
 package com.upgrad.FoodOrderingApp.service.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
@@ -115,6 +118,7 @@ public class CustomerAuthEntity {
 
     @ManyToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     public CustomerEntity getCustomer() {
         return customerEntity;
     }
