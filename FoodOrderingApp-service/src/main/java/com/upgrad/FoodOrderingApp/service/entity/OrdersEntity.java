@@ -9,7 +9,8 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "orders")
 @NamedQueries({
-        @NamedQuery(name = "getOrdersByAddress", query = "SELECT o FROM OrdersEntity o WHERE o.address = :address")
+        @NamedQuery(name = "getOrdersByAddress", query = "SELECT o FROM OrdersEntity o WHERE o.address = :address"),
+        @NamedQuery(name = "getOrdersByCustomers", query = "SELECT o FROM OrdersEntity o WHERE o.customer = :customer ORDER BY o.date DESC")
 })
 public class OrdersEntity implements Serializable {
 

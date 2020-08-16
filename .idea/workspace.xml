@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd6e9e27-adf4-4817-a5f3-e3b30253c0ae" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/ItemService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/CouponDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/ItemDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/controller/AddressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/test/java/com/upgrad/FoodOrderingApp/api/controller/CustomerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/test/java/com/upgrad/FoodOrderingApp/api/controller/CustomerControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/main/java/com/upgrad/FoodOrderingApp/api/controller/OrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/test/java/com/upgrad/FoodOrderingApp/api/controller/OrderControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/test/java/com/upgrad/FoodOrderingApp/api/controller/OrderControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/src/test/java/com/upgrad/FoodOrderingApp/api/controller/PaymentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/src/test/java/com/upgrad/FoodOrderingApp/api/controller/PaymentControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-api/target/test-classes/com/upgrad/FoodOrderingApp/api/controller/PaymentControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-api/target/test-classes/com/upgrad/FoodOrderingApp/api/controller/PaymentControllerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/AddressService.class" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/target/classes/com/upgrad/FoodOrderingApp/service/businness/AddressService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/businness/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/OrdersEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/OrdersEntity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +80,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AddressControllerTest.shouldNotSaveAddressWithIncorrectStateId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AddressControllerTest.shouldNotSaveAddressWithEmptyWrongPinCode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodOrderingApp-api" />
       <extension name="coverage">
         <pattern>
@@ -89,7 +90,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
       <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.AddressControllerTest" />
-      <option name="METHOD_NAME" value="shouldNotSaveAddressWithIncorrectStateId" />
+      <option name="METHOD_NAME" value="shouldNotSaveAddressWithEmptyWrongPinCode" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -158,10 +159,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.OrderControllerTest" />
+        <item itemvalue="JUnit.AddressControllerTest.shouldNotSaveAddressWithEmptyWrongPinCode" />
         <item itemvalue="JUnit.PaymentControllerTest" />
         <item itemvalue="JUnit.CustomerControllerTest" />
         <item itemvalue="JUnit.CategoryControllerTest" />
-        <item itemvalue="JUnit.AddressControllerTest.shouldNotSaveAddressWithIncorrectStateId" />
       </list>
     </recent_temporary>
   </component>
@@ -246,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597604158598</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Included additional features and fixed attribute names of classes to bring them in line with test cases.">
+      <created>1597606114412</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1597606114412</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,30 +287,30 @@
       <screen x="0" y="23" width="1680" height="957" />
     </state>
     <state x="578" y="255" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1680.957@0.23.1680.957" timestamp="1597587407820" />
-    <state x="319" y="77" key="CommitChangelistDialog2" timestamp="1597604158351">
+    <state x="319" y="77" key="CommitChangelistDialog2" timestamp="1597606114219">
       <screen x="0" y="23" width="1680" height="957" />
     </state>
-    <state x="319" y="77" key="CommitChangelistDialog2/0.23.1680.957@0.23.1680.957" timestamp="1597604158351" />
+    <state x="319" y="77" key="CommitChangelistDialog2/0.23.1680.957@0.23.1680.957" timestamp="1597606114219" />
     <state x="319" y="77" key="CommitChangelistDialog2/0.23.1680.958@0.23.1680.958" timestamp="1597381277080" />
-    <state width="1638" height="258" key="GridCell.Tab.0.bottom" timestamp="1597606015324">
+    <state width="1638" height="258" key="GridCell.Tab.0.bottom" timestamp="1597607740378">
       <screen x="0" y="23" width="1680" height="957" />
     </state>
-    <state width="1638" height="258" key="GridCell.Tab.0.bottom/0.23.1680.957@0.23.1680.957" timestamp="1597606015324" />
+    <state width="1638" height="258" key="GridCell.Tab.0.bottom/0.23.1680.957@0.23.1680.957" timestamp="1597607740378" />
     <state width="1638" height="257" key="GridCell.Tab.0.bottom/0.23.1680.958@0.23.1680.958" timestamp="1597381244368" />
-    <state width="1638" height="258" key="GridCell.Tab.0.center" timestamp="1597606015323">
+    <state width="1638" height="258" key="GridCell.Tab.0.center" timestamp="1597607740377">
       <screen x="0" y="23" width="1680" height="957" />
     </state>
-    <state width="1638" height="258" key="GridCell.Tab.0.center/0.23.1680.957@0.23.1680.957" timestamp="1597606015323" />
+    <state width="1638" height="258" key="GridCell.Tab.0.center/0.23.1680.957@0.23.1680.957" timestamp="1597607740377" />
     <state width="1638" height="257" key="GridCell.Tab.0.center/0.23.1680.958@0.23.1680.958" timestamp="1597381244367" />
-    <state width="1638" height="258" key="GridCell.Tab.0.left" timestamp="1597606015323">
+    <state width="1638" height="258" key="GridCell.Tab.0.left" timestamp="1597607740377">
       <screen x="0" y="23" width="1680" height="957" />
     </state>
-    <state width="1638" height="258" key="GridCell.Tab.0.left/0.23.1680.957@0.23.1680.957" timestamp="1597606015323" />
+    <state width="1638" height="258" key="GridCell.Tab.0.left/0.23.1680.957@0.23.1680.957" timestamp="1597607740377" />
     <state width="1638" height="257" key="GridCell.Tab.0.left/0.23.1680.958@0.23.1680.958" timestamp="1597381244365" />
-    <state width="1638" height="258" key="GridCell.Tab.0.right" timestamp="1597606015324">
+    <state width="1638" height="258" key="GridCell.Tab.0.right" timestamp="1597607740378">
       <screen x="0" y="23" width="1680" height="957" />
     </state>
-    <state width="1638" height="258" key="GridCell.Tab.0.right/0.23.1680.957@0.23.1680.957" timestamp="1597606015324" />
+    <state width="1638" height="258" key="GridCell.Tab.0.right/0.23.1680.957@0.23.1680.957" timestamp="1597607740378" />
     <state width="1638" height="257" key="GridCell.Tab.0.right/0.23.1680.958@0.23.1680.958" timestamp="1597381244367" />
     <state width="1638" height="318" key="GridCell.Tab.1.bottom" timestamp="1597604218785">
       <screen x="0" y="23" width="1680" height="957" />
@@ -348,15 +356,15 @@
       <screen x="0" y="23" width="1680" height="957" />
     </state>
     <state x="328" y="83" key="SettingsEditor/0.23.1680.957@0.23.1680.957" timestamp="1597605510824" />
-    <state x="440" y="241" key="Vcs.Push.Dialog.v2" timestamp="1597604161827">
+    <state x="440" y="241" key="Vcs.Push.Dialog.v2" timestamp="1597606119332">
       <screen x="0" y="23" width="1680" height="957" />
     </state>
-    <state x="440" y="241" key="Vcs.Push.Dialog.v2/0.23.1680.957@0.23.1680.957" timestamp="1597604161827" />
+    <state x="440" y="241" key="Vcs.Push.Dialog.v2/0.23.1680.957@0.23.1680.957" timestamp="1597606119332" />
     <state x="440" y="241" key="Vcs.Push.Dialog.v2/0.23.1680.958@0.23.1680.958" timestamp="1597381452670" />
-    <state x="638" y="422" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597592501326">
+    <state x="638" y="422" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597608416603">
       <screen x="0" y="23" width="1680" height="957" />
     </state>
-    <state x="638" y="422" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1680.957@0.23.1680.957" timestamp="1597592501326" />
+    <state x="638" y="422" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1680.957@0.23.1680.957" timestamp="1597608416603" />
     <state x="638" y="422" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1680.958@0.23.1680.958" timestamp="1597381265918" />
     <state x="246" y="244" width="1188" height="617" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1597587686343">
       <screen x="0" y="23" width="1680" height="957" />
