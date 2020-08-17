@@ -46,4 +46,9 @@ public class RestaurantDAO {
         }
 
     }
+
+    //Update modifying restaurant details in DB
+    public RestaurantEntity updateRestaurantEntity(RestaurantEntity restaurantEntity) {
+        return entityManager.merge(restaurantEntity);
+    }
 }

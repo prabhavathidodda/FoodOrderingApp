@@ -64,6 +64,7 @@ public class OrderController {
      * @throws AddressNotFoundException
      * @throws CouponNotFoundException
      */
+    /*
     @CrossOrigin
     @RequestMapping(
             method = RequestMethod.GET,
@@ -79,6 +80,5 @@ public class OrderController {
         customerEntity = customerService.getCustomer(bearerToken);
         ordersEntityList = orderService.getOrdersByCustomers(customerEntity.getUuid());
 
-
-    }
+    }*/
 }

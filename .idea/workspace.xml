@@ -15,6 +15,7 @@
       <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/dao/OrderDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/OrdersEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/FoodOrderingApp-service/src/main/java/com/upgrad/FoodOrderingApp/service/entity/OrdersEntity.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,6 +44,9 @@
     </option>
   </component>
   <component name="ProjectId" id="1g36X2sr3zGmGdbHljJQLdGTkYv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -68,7 +72,19 @@
       <recent name="com.upgrad.FoodOrderingApp.api.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.OrderControllerTest">
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.RestaurantControllerTest">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -111,21 +127,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CustomerControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="FoodOrderingApp-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.upgrad.FoodOrderingApp.api.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.CustomerControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="OrderControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="FoodOrderingApp-api" />
       <extension name="coverage">
@@ -156,17 +157,66 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RestaurantControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="FoodOrderingApp-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.upgrad.FoodOrderingApp.api.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.upgrad.FoodOrderingApp.api.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.upgrad.FoodOrderingApp.api.controller.RestaurantControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FoodOrderingApp-Backend []" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.AddressControllerTest.shouldNotSaveAddressWithEmptyWrongPinCode" />
+      <item itemvalue="JUnit.CategoryControllerTest" />
+      <item itemvalue="JUnit.OrderControllerTest" />
+      <item itemvalue="JUnit.PaymentControllerTest" />
+      <item itemvalue="Maven.FoodOrderingApp-Backend []" />
+      <item itemvalue="JUnit.RestaurantControllerTest" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RestaurantControllerTest" />
+        <item itemvalue="JUnit.CategoryControllerTest" />
+        <item itemvalue="JUnit.PaymentControllerTest" />
         <item itemvalue="JUnit.OrderControllerTest" />
         <item itemvalue="JUnit.AddressControllerTest.shouldNotSaveAddressWithEmptyWrongPinCode" />
-        <item itemvalue="JUnit.PaymentControllerTest" />
-        <item itemvalue="JUnit.CustomerControllerTest" />
-        <item itemvalue="JUnit.CategoryControllerTest" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="bd6e9e27-adf4-4817-a5f3-e3b30253c0ae" name="Default Changelist" comment="" />
@@ -259,6 +309,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Bugs fixed." />
